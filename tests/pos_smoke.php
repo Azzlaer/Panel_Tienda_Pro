@@ -10,7 +10,7 @@ $checks=[
  'record sale transaction'=>str_contains($logic,'beginTransaction()') && str_contains($logic,'rollBack()') && str_contains($logic,'commit()'),
  'ownership enforced'=>str_contains($logic,'user_id=?') && str_contains($logic,'FOR UPDATE'),
  'no negative stock'=>str_contains($logic,'$stock<$quantity'),
- 'unknown stock not sellable'=>str_contains($logic,"$p['stock']===null"),
+ 'unknown stock not sellable'=>str_contains($logic,'$p[\'stock\']===null'),
  'ledger recorded'=>str_contains($logic,'pos_stock_movements'),
  'three additive tables'=>substr_count($sql,'CREATE TABLE IF NOT EXISTS')===3,
  'seller auth'=>str_contains($page,'require_login()'),
