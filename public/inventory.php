@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 $q=db()->prepare('SELECT id,title,stock,price_clp,status FROM products WHERE user_id=? ORDER BY created_at DESC LIMIT 300');$q->execute([$uid]);$items=$q->fetchAll();
 $pageTitle='Inventario PRO';require __DIR__.'/../partials/header.php';?>
 <link rel="stylesheet" href="<?=url('assets/css/commerce-suite.css')?>">
-<section class="suite"><header class="suite-hero"><span>COMMERCE SUITE · VENDEDOR</span><h1>Inventario PRO</h1><p>Gestiona precios y existencias de hasta tus 300 artículos más recientes. Deja el stock vacío si no está especificado.</p></header>
+<section class="suite"><p><a href="<?=url('pos.php')?>">🧾 Abrir Punto de Venta PRO</a></p><header class="suite-hero"><span>COMMERCE SUITE · VENDEDOR</span><h1>Inventario PRO</h1><p>Gestiona precios y existencias de hasta tus 300 artículos más recientes. Deja el stock vacío si no está especificado.</p></header>
 <div class="suite-grid"><?php foreach($items as $p):?><form class="suite-card" method="post"><?=csrf_field()?><input type="hidden" name="id" value="<?=(int)$p['id']?>"><h3><?=e($p['title'])?></h3><small><?=e($p['status'])?></small><label>Precio CLP<input required type="number" min="0" max="999999999999" name="price" value="<?=(int)$p['price_clp']?>"></label><label>Unidades disponibles<input type="number" min="0" max="10000000" name="stock" placeholder="Sin especificar" value="<?=($p['stock']===null?'':(int)$p['stock'])?>"></label><button>Guardar cambios</button></form><?php endforeach;?></div>
 <?php if(!$items):?><p>No tienes productos todavía. <a href="<?=url('product_create.php')?>">Publica el primero</a>.</p><?php endif;?></section>
 <?php require __DIR__.'/../partials/footer.php';?>
