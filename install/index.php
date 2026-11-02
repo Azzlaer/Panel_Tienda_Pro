@@ -63,33 +63,49 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     $mailFrom=q('mail_from'); $mailName=q('mail_name',$siteName); $mailHost=q('mail_host'); $mailPort=q('mail_port','587');
     $mailUser=q('mail_user'); $mailPass=(string)($_POST['mail_pass'] ?? ''); $mailEncryption=q('mail_encryption','tls');
     $adminName=q('admin_name'); $adminUser=q('admin_user'); $adminEmail=q('admin_email'); $adminPass=(string)($_POST['admin_pass'] ?? '');
-    $resetDatabase=isset($_POST['reset_database']); $installDemo=isset($_POST['install_demo']);
+    $installDemo=isset($_POST['install_demo']);
+    $freshStart=isset($_POST['fresh_start']);
+    $freshConfirmation=q('fresh_confirmation');
+    if ($freshStart && ($freshConfirmation !== 'REINICIAR '.$dbName)) $errors[]='Escribe exactamente REINICIAR '.$dbName.' para confirmar el borrado irreversible.';
 
     if ($siteName==='') $errors[]='El nombre del sitio es obligatorio.';
-    if (!filter_var($appUrl,FILTER_VALIDATE_URL)) $errors[]='La URL del sitio no es válida.';
+    if (!filter_var($appUrl,FILTER_VALIDATE_URL) || !in_array(strtolower((string)parse_url($appUrl,PHP_URL_SCHEME)),['http','https'],true) || parse_url($appUrl,PHP_URL_USER)!==null || parse_url($appUrl,PHP_URL_PASS)!==null) $errors[]='La URL pública debe ser HTTP/HTTPS, sin credenciales.';
     if (!preg_match('/^[A-Za-z0-9_]{3,40}$/',$adminUser)) $errors[]='El usuario administrador debe tener 3-40 caracteres, letras, números o guion bajo.';
     if (!filter_var($adminEmail,FILTER_VALIDATE_EMAIL)) $errors[]='El correo del administrador no es válido.';
-    if (strlen($adminPass)<10) $errors[]='La contraseña del administrador debe tener al menos 10 caracteres.';
+    if (strlen($adminPass)<12) $errors[]='La contraseña del administrador debe tener al menos 12 caracteres.';
     if ($mailFrom!=='' && !filter_var($mailFrom,FILTER_VALIDATE_EMAIL)) $errors[]='El correo remitente no es válido.';
     if (!preg_match('/^[A-Za-z0-9_]+$/',$dbName)) $errors[]='El nombre de base de datos sólo puede contener letras, números y guion bajo.';
+    if ($cookieSameSite==='None' && !$cookieSecure) $errors[]='SameSite=None requiere cookie Secure y HTTPS.';
+    if (!in_array($cookieSameSite,['Lax','Strict','None'],true)) $errors[]='SameSite inválido.';
+    if ($cookieSecure && parse_url($appUrl,PHP_URL_SCHEME)!=='https') $errors[]='La cookie Secure requiere URL HTTPS.';
     if (!ctype_digit($dbPort) || (int)$dbPort<1 || (int)$dbPort>65535) $errors[]='Puerto MySQL inválido.';
 
     if (!$errors) {
         try {
             $serverDsn="mysql:host={$dbHost};port={$dbPort};charset=utf8mb4";
             $pdo=new PDO($serverDsn,$dbUser,$dbPass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>false]);
-            if ($resetDatabase) {
-                $pdo->exec("DROP DATABASE IF EXISTS `{$dbName}`");
-            }
             try {
                 $pdo->exec("CREATE DATABASE IF NOT EXISTS `{$dbName}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
             } catch (PDOException $createError) {
-                if ($resetDatabase) throw new RuntimeException('El usuario MySQL no tiene permisos para eliminar y recrear la base. En XAMPP usa root o elimina la base desde phpMyAdmin.');
+                throw new RuntimeException('No se pudo crear o consultar la base seleccionada. Revisa los permisos MySQL.');
             }
             $pdo=new PDO("mysql:host={$dbHost};port={$dbPort};dbname={$dbName};charset=utf8mb4",$dbUser,$dbPass,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC,PDO::ATTR_EMULATE_PREPARES=>false]);
             $existingTables=(int)$pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=".$pdo->quote($dbName))->fetchColumn();
-            if ($existingTables>0 && !$resetDatabase) {
-                throw new RuntimeException('La base seleccionada ya contiene tablas. Marca «Borrar y recrear la base» para una recompilación limpia o utiliza otra base vacía.');
+            if ($existingTables>0 && !$freshStart) {
+                throw new RuntimeException('La base seleccionada contiene tablas. Usa una base vacía o el modo Empezar de cero, que destruye todos sus datos.');
+            }
+            if ($freshStart && $existingTables>0) {
+                // Solo la base seleccionada. No eliminamos usuarios ni privilegios globales de MySQL.
+                // Desactivar claves externas evita fallos por el orden de las dependencias.
+                $tables=$pdo->query("SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_SCHEMA=".$pdo->quote($dbName)." AND TABLE_TYPE='BASE TABLE'")->fetchAll(PDO::FETCH_COLUMN);
+                $views=$pdo->query("SELECT TABLE_NAME FROM information_schema.views WHERE TABLE_SCHEMA=".$pdo->quote($dbName))->fetchAll(PDO::FETCH_COLUMN);
+                $pdo->exec('SET FOREIGN_KEY_CHECKS=0');
+                try {
+                    foreach ($views as $name) $pdo->exec('DROP VIEW IF EXISTS '. chr(96).str_replace(chr(96),chr(96).chr(96),$name).chr(96));
+                    foreach ($tables as $name) $pdo->exec('DROP TABLE IF EXISTS '.chr(96).str_replace(chr(96),chr(96).chr(96),$name).chr(96));
+                } finally {
+                    $pdo->exec('SET FOREIGN_KEY_CHECKS=1');
+                }
             }
             $sql=file_get_contents($root.'/database/schema.sql');
             foreach (array_filter(array_map('trim', preg_split('/;\s*(?:\r?\n|$)/', (string)$sql))) as $statement) $pdo->exec($statement);
@@ -129,7 +145,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
             $config.="const ALLOWED_IMAGE_MIMES = ['image/jpeg','image/png','image/webp','image/gif'];\n\n";
             $config.="ini_set('session.use_strict_mode','1');\nini_set('session.cookie_httponly','1');\nini_set('session.cookie_samesite', COOKIE_SAMESITE);\nini_set('session.cookie_path', COOKIE_PATH);\nif (COOKIE_DOMAIN !== '') ini_set('session.cookie_domain', COOKIE_DOMAIN);\nif (COOKIE_SECURE) ini_set('session.cookie_secure','1');\nsession_name(COOKIE_NAME);\nif (session_status() !== PHP_SESSION_ACTIVE) session_start();\n";
             if (file_put_contents($configFile,$config,LOCK_EX)===false) throw new RuntimeException('No se pudo escribir config/config.php.');
-            file_put_contents($lockFile,"Instalado: ".date(DATE_ATOM)."\n",LOCK_EX);
+            if (file_put_contents($lockFile,"Instalado: ".date(DATE_ATOM)."\n",LOCK_EX)===false) throw new RuntimeException('No se pudo escribir storage/installed.lock.');
+            if (!is_file($lockFile)) throw new RuntimeException('No se pudo crear el bloqueo del instalador.');
             $success=true;
             unset($_SESSION['installer_csrf']);
         } catch(Throwable $e) {
@@ -149,7 +166,9 @@ function val(string $key, array $defaults): string { return h($_POST[$key] ?? $d
 <form method="post" autocomplete="off"><input type="hidden" name="csrf" value="<?=h($_SESSION['installer_csrf'])?>">
 <div class="card"><h2>2. Información del sitio</h2><div class="grid"><label>Nombre del comercio<input name="site_name" required value="<?=val('site_name',$defaults)?>"></label><label>Descripción o eslogan<input name="site_description" required value="<?=val('site_description',$defaults)?>"></label><label class="full">URL pública de la aplicación<input name="app_url" required value="<?=val('app_url',$defaults)?>"><small>En XAMPP normalmente termina en <b>/ComercioSocial/public</b>.</small></label></div></div>
 <div class="card"><h2>3. Base de datos MySQL/MariaDB</h2><div class="grid"><label>Servidor<input name="db_host" required value="<?=val('db_host',$defaults)?>"></label><label>Puerto<input name="db_port" required value="<?=val('db_port',$defaults)?>"></label><label>Nombre de la base<input name="db_name" required value="<?=val('db_name',$defaults)?>"></label><label>Usuario MySQL<input name="db_user" required value="<?=val('db_user',$defaults)?>"></label><label class="full">Contraseña MySQL<input type="password" name="db_pass"><small>En XAMPP nuevo suele quedar vacía para root. En hosting debes usar la asignada por el proveedor.</small></label>
-<label class="check full"><input type="checkbox" name="reset_database" checked> <span><b>Borrar y recrear completamente la base seleccionada</b><small>Recomendado para esta recompilación limpia. Elimina cualquier dato anterior de esa base.</small></span></label>
+<div class="hint full"><b>Instalación normal:</b> utiliza una base vacía y no elimina datos. Para restaurar una instalación utiliza un respaldo.</div>
+<label class="check full"><input type="checkbox" name="fresh_start" value="1" <?=isset($_POST['fresh_start'])?'checked':''?>><span><b>Empezar de cero (BORRAR TODAS LAS TABLAS)</b><small>Elimina tablas y vistas de la base seleccionada, y crea el esquema, roles y administrador nuevamente. NO borra cuentas/privilegios globales de MySQL ni archivos del servidor.</small></span></label>
+<label class="full">Confirmación de reinicio<input type="text" name="fresh_confirmation" autocomplete="off" placeholder="REINICIAR nombre_de_base" value=""><small>Solo para Empezar de cero: escribe exactamente REINICIAR seguido del nombre de la base. ¡Todos sus datos se perderán! Exporta un respaldo antes.</small></label>
 <label class="check full"><input type="checkbox" name="install_demo"> <span><b>Instalar 10 vendedores y 10 publicaciones demo</b><small>Incluye imágenes locales para probar catálogo, perfiles y visor.</small></span></label></div></div>
 <div class="card"><h2>4. Cookies y sesiones</h2><div class="grid"><label>Nombre de cookie<input name="cookie_name" value="<?=val('cookie_name',$defaults)?>"></label><label>Dominio de cookie<input name="cookie_domain" value="<?=val('cookie_domain',$defaults)?>" placeholder="Vacío en localhost"></label><label>Ruta<input name="cookie_path" value="<?=val('cookie_path',$defaults)?>"></label><label>SameSite<select name="cookie_samesite"><?php foreach(['Lax','Strict','None'] as $s):?><option <?=$s===($_POST['cookie_samesite']??'Lax')?'selected':''?>><?=$s?></option><?php endforeach;?></select></label><label class="check full"><input type="checkbox" name="cookie_secure" <?=isset($_POST['cookie_secure'])?'checked':''?>> Usar cookie Secure (actívalo sólo con HTTPS)</label></div></div>
 <div class="card"><h2>5. Correo del sitio (opcional)</h2><div class="grid"><label>Correo remitente<input type="email" name="mail_from" value="<?=val('mail_from',$defaults)?>"></label><label>Nombre remitente<input name="mail_name" value="<?=val('mail_name',$defaults)?>"></label><label>Servidor SMTP<input name="mail_host" value="<?=val('mail_host',$defaults)?>" placeholder="smtp.ejemplo.com"></label><label>Puerto SMTP<input name="mail_port" value="<?=val('mail_port',$defaults)?>"></label><label>Usuario SMTP<input name="mail_user" value="<?=val('mail_user',$defaults)?>"></label><label>Contraseña SMTP<input type="password" name="mail_pass"></label><label>Cifrado<select name="mail_encryption"><option value="tls">TLS</option><option value="ssl">SSL</option><option value="">Sin cifrado</option></select></label></div></div>

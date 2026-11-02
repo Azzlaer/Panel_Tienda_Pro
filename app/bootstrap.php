@@ -96,7 +96,7 @@ function record_login_attempt(string $identity, bool $success): void {
 /* ==============================
    Núcleo v1.6: modo vitrina, migraciones y auditoría
    ============================== */
-function app_version(): string { return '6.2.0'; }
+function app_version(): string { return '6.3.0'; }
 function ensure_core_v16_schema(): void {
     static $done=false; if($done)return; $done=true;
     db()->exec("CREATE TABLE IF NOT EXISTS schema_migrations (
