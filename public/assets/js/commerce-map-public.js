@@ -1,0 +1,1 @@
+(()=>{'use strict';const search=document.getElementById('mapSearch');if(!search)return;search.addEventListener('input',()=>{const term=search.value.trim().toLocaleLowerCase();document.querySelectorAll('.map-list-item').forEach(el=>{el.hidden=!el.dataset.search.includes(term);});});})();

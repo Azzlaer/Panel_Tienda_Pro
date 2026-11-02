@@ -1,0 +1,23 @@
+{
+  "name": "Barrio Market",
+  "slug": "barrio-market",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Cálido y comunitario; locales, cercanía y emprendimientos protagonistas.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "Chile",
+    "nuevo CSS",
+    "responsive",
+    "comercios",
+    "slider",
+    "mapa",
+    "perfiles PRO"
+  ]
+}

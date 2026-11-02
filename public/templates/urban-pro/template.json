@@ -1,0 +1,21 @@
+{
+  "name": "Urban Pro Chile",
+  "slug": "urban-pro",
+  "version": "2.1.0",
+  "author": "ComercioSocial",
+  "author_url": "",
+  "description": "Tema comercial limpio inspirado en tiendas modernas, adaptado al catálogo social chileno.",
+  "min_app_version": "2.0.0",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "",
+  "tags": [
+    "comercio",
+    "chile",
+    "catalogo",
+    "responsive"
+  ],
+  "layout_version": "urban-2"
+}

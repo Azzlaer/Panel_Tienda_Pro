@@ -1,0 +1,23 @@
+{
+  "name": "Chile Vitrina",
+  "slug": "chile-vitrina",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Catálogo urbano enfocado en búsqueda, descuentos y precios visibles.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "Chile",
+    "nuevo CSS",
+    "responsive",
+    "comercios",
+    "slider",
+    "mapa",
+    "perfiles PRO"
+  ]
+}

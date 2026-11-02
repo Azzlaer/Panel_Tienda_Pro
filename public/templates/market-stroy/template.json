@@ -1,0 +1,22 @@
+{
+  "name": "Market Navigator",
+  "slug": "market-stroy",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Catálogo con categorías destacadas, buscador predominante y tarjetas comerciales.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "original",
+    "responsive",
+    "comercios",
+    "noticias",
+    "slider",
+    "mapa"
+  ]
+}

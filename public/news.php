@@ -1,0 +1,9 @@
+<?php
+require_once __DIR__.'/../app/bootstrap.php';ensure_news_schema();$id=(int)($_GET['id']??0);
+$q=db()->prepare("SELECT n.*,u.username,p.display_name,p.avatar FROM news n JOIN users u ON u.id=n.created_by LEFT JOIN profiles p ON p.user_id=u.id WHERE n.id=? AND n.status='published'");$q->execute([$id]);$news=$q->fetch();if(!$news){http_response_code(404);exit('Noticia no encontrada.');}
+db()->prepare('UPDATE news SET views=views+1 WHERE id=?')->execute([$id]);
+$pageTitle=$news['title'];$pageDescription=$news['excerpt']?:mb_strimwidth(strip_tags((string)$news['content']),0,300,'…');$pageCanonical=url('news.php?id='.$news['id']);$pageImage=$news['cover_image']?:'assets/cover.svg';
+require __DIR__.'/../partials/header.php';?>
+<article class="public-news-detail"><?php if($news['cover_image']):?><img class="public-news-cover" src="<?=url($news['cover_image'])?>" alt="<?=e($news['title'])?>"><?php endif;?><div class="public-news-body"><div class="news-meta"><span>📰 NOTICIAS</span><time><?=date('d/m/Y H:i',strtotime($news['published_at']?:$news['created_at']))?></time></div><h1><?=e($news['title'])?></h1><div class="news-author"><img src="<?=url($news['avatar']?:'assets/img-avatar.svg')?>"><span>Publicado por <b><?=e($news['display_name']?:$news['username'])?></b></span></div><?php if($news['excerpt']):?><p class="news-lead"><?=e($news['excerpt'])?></p><?php endif;?><div class="news-rich-content"><?=render_news_content($news['content'],$news['content_format'])?></div><div class="news-share"><a class="btn" href="https://wa.me/?text=<?=rawurlencode($news['title'].' '.url('news.php?id='.$news['id']))?>" target="_blank" rel="noopener">💬 Compartir por WhatsApp</a><a class="btn secondary" href="index.php#noticias">← Volver a noticias</a></div></div></article>
+<?=adsense('article')?>
+<?php require __DIR__.'/../partials/footer.php';?>

@@ -1,0 +1,13 @@
+{
+  "name": "Verde Chile Demo",
+  "slug": "verde-chile-demo",
+  "version": "1.0.0",
+  "author": "ComercioSocial",
+  "author_url": "",
+  "description": "Plantilla de ejemplo con tonos verdes, botones grandes y tarjetas comerciales.",
+  "min_app_version": "2.0.0",
+  "styles": ["assets/theme.css"],
+  "scripts": [],
+  "preview": "",
+  "tags": ["demo", "verde", "chile"]
+}

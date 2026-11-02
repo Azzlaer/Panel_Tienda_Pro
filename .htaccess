@@ -1,0 +1,9 @@
+Options -Indexes
+DirectoryIndex index.php
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(?:config|app|database|storage|partials)(?:/|$) - [F,L,NC]
+</IfModule>
+<FilesMatch "^(?:\.env|composer\.(?:json|lock)|README\.md|.*\.sql|.*\.log|installed\.lock)$">
+Require all denied
+</FilesMatch>

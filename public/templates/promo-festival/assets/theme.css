@@ -1,0 +1,35 @@
+/* ComercioSocial v5.2: Promo Festival — diseño original, compatible con urban-2. */
+body.enterprise-public.theme-promo-festival{--primary:#db2777;--secondary:#f59e0b;--bg:#fff7fc;--text:#441b4f;--cse-accent:#db2777;--cse-nav:#32134d;--cse-surface:#ffffff;--cse-ink:#441b4f;background:#fff7fc;color:#441b4f;}
+body.enterprise-public.theme-promo-festival .urban-contactbar{background:#32134d;color:#cad5e7;}
+body.enterprise-public.theme-promo-festival .urban-header{background:#ffffff;border-bottom:1px solid #db27771f;}
+body.enterprise-public.theme-promo-festival .urban-header .urban-brand, body.enterprise-public.theme-promo-festival .urban-brand b{color:#441b4f!important;}
+body.enterprise-public.theme-promo-festival .urban-brand>span{background:linear-gradient(135deg,#db2777,#f59e0b);}
+body.enterprise-public.theme-promo-festival .urban-account-links a{color:#441b4f;opacity:.83;}
+body.enterprise-public.theme-promo-festival .urban-account-links a:last-child{color:#db2777;opacity:1;}
+body.enterprise-public.theme-promo-festival .urban-search input{background:#fff7fc;border-color:#db277733;color:#441b4f;}
+body.enterprise-public.theme-promo-festival .urban-search button{background:#db2777;color:#fff;}
+body.enterprise-public.theme-promo-festival .urban-menu{background:#32134d;}
+body.enterprise-public.theme-promo-festival .urban-menu a:hover, body.enterprise-public.theme-promo-festival .urban-menu a.publish{background:#db2777;color:#fff;}
+body.enterprise-public.theme-promo-festival .urban-layout{background:transparent!important;}
+body.enterprise-public.theme-promo-festival .urban-hero{border-radius:18px;box-shadow:0 16px 38px #101d2b1a;}
+body.enterprise-public.theme-promo-festival .urban-hero:before{background:linear-gradient(90deg,#32134df2,#32134dd9 50%,#32134d44);}
+body.enterprise-public.theme-promo-festival .urban-kicker{color:#f59e0b;}
+body.enterprise-public.theme-promo-festival .urban-btn{background:#db2777!important;border-radius:10px!important;color:#fff!important;}
+body.enterprise-public.theme-promo-festival .urban-btn.ghost{background:transparent!important;border:1px solid #ffffffaa!important;color:#fff!important;}
+body.enterprise-public.theme-promo-festival .urban-category-card{border-radius:16px;box-shadow:0 8px 24px #00000013;}
+body.enterprise-public.theme-promo-festival .urban-filter-form,body.enterprise-public.theme-promo-festival .urban-product-card,body.enterprise-public.theme-promo-festival .urban-three-columns>div,body.enterprise-public.theme-promo-festival .urban-article-grid article{background:#ffffff;border-color:#db277726;color:#441b4f;box-shadow:0 6px 25px #0000000a;}
+body.enterprise-public.theme-promo-festival .urban-filter-form label,body.enterprise-public.theme-promo-festival .urban-product-info>small{color:#441b4f;opacity:.68;}
+body.enterprise-public.theme-promo-festival .urban-filter-form input,body.enterprise-public.theme-promo-festival .urban-filter-form select{background:#fff7fc;color:#441b4f;border-color:#db277738;}
+body.enterprise-public.theme-promo-festival .urban-section-title{border-color:#db277730;}
+body.enterprise-public.theme-promo-festival .urban-section-title h2,body.enterprise-public.theme-promo-festival .urban-product-info h3 a,body.enterprise-public.theme-promo-festival .urban-three-columns h3,body.enterprise-public.theme-promo-festival .urban-article-grid h3 a{color:#441b4f;}
+body.enterprise-public.theme-promo-festival .urban-section-title span,body.enterprise-public.theme-promo-festival .urban-section-title>a,body.enterprise-public.theme-promo-festival .urban-price{color:#db2777;}
+body.enterprise-public.theme-promo-festival .urban-product-image{background:#fff7fc;}
+body.enterprise-public.theme-promo-festival .urban-sale,body.enterprise-public.theme-promo-festival .urban-readmore{background:#db2777;}
+body.enterprise-public.theme-promo-festival .urban-promo{border-radius:18px;}
+body.enterprise-public.theme-promo-festival .urban-footer{background:#32134d;color:#e1ebf4;}
+body.enterprise-public.theme-promo-festival .urban-footer-bottom{background:#32134d;border-top:1px solid #ffffff20;}
+body.enterprise-public.theme-promo-festival .urban-footer a{color:#e5edf7;}
+body.enterprise-public.theme-promo-festival :is(a,button,input,select,textarea):focus-visible{outline:3px solid #f59e0b;outline-offset:2px;}
+body.enterprise-public.theme-promo-festival .urban-hero{min-height:430px;}body.enterprise-public.theme-promo-festival .urban-hero:before{background:linear-gradient(105deg,#32134df2,#7c1f7cbd 65%,#db27773b);}body.enterprise-public.theme-promo-festival .urban-product-card{border-radius:20px;}body.enterprise-public.theme-promo-festival .urban-sale{background:#db2777;font-weight:800;}body.enterprise-public.theme-promo-festival .urban-promo{box-shadow:0 12px 30px #db277723;}
+@media(max-width:900px){body.enterprise-public.theme-promo-festival .urban-header{grid-template-columns:minmax(0,1fr);grid-template-areas:"brand" "search" "account";gap:14px;}body.enterprise-public.theme-promo-festival .urban-menu{overflow-x:auto;justify-content:flex-start;}body.enterprise-public.theme-promo-festival .urban-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}body.enterprise-public.theme-promo-festival .urban-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:600px){body.enterprise-public.theme-promo-festival .urban-layout{width:calc(100% - 24px)!important;}body.enterprise-public.theme-promo-festival .urban-product-grid,body.enterprise-public.theme-promo-festival .urban-category-grid{grid-template-columns:minmax(0,1fr);}body.enterprise-public.theme-promo-festival .urban-header{padding:18px 14px;}body.enterprise-public.theme-promo-festival .urban-hero{padding:28px 20px;min-height:320px;}body.enterprise-public.theme-promo-festival .urban-hero h1{font-size:clamp(28px,7vw,40px);}body.enterprise-public.theme-promo-festival .urban-footer-grid{grid-template-columns:1fr;}}

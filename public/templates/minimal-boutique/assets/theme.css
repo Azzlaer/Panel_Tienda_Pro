@@ -1,0 +1,35 @@
+/* ComercioSocial v5.2: Boutique Minimal — diseño original, compatible con urban-2. */
+body.enterprise-public.theme-minimal-boutique{--primary:#a87c52;--secondary:#ad8b71;--bg:#faf9f7;--text:#262321;--cse-accent:#a87c52;--cse-nav:#262626;--cse-surface:#ffffff;--cse-ink:#262321;background:#faf9f7;color:#262321;}
+body.enterprise-public.theme-minimal-boutique .urban-contactbar{background:#262626;color:#cad5e7;}
+body.enterprise-public.theme-minimal-boutique .urban-header{background:#ffffff;border-bottom:1px solid #a87c521f;}
+body.enterprise-public.theme-minimal-boutique .urban-header .urban-brand, body.enterprise-public.theme-minimal-boutique .urban-brand b{color:#262321!important;}
+body.enterprise-public.theme-minimal-boutique .urban-brand>span{background:linear-gradient(135deg,#a87c52,#ad8b71);}
+body.enterprise-public.theme-minimal-boutique .urban-account-links a{color:#262321;opacity:.83;}
+body.enterprise-public.theme-minimal-boutique .urban-account-links a:last-child{color:#a87c52;opacity:1;}
+body.enterprise-public.theme-minimal-boutique .urban-search input{background:#faf9f7;border-color:#a87c5233;color:#262321;}
+body.enterprise-public.theme-minimal-boutique .urban-search button{background:#a87c52;color:#fff;}
+body.enterprise-public.theme-minimal-boutique .urban-menu{background:#262626;}
+body.enterprise-public.theme-minimal-boutique .urban-menu a:hover, body.enterprise-public.theme-minimal-boutique .urban-menu a.publish{background:#a87c52;color:#fff;}
+body.enterprise-public.theme-minimal-boutique .urban-layout{background:transparent!important;}
+body.enterprise-public.theme-minimal-boutique .urban-hero{border-radius:18px;box-shadow:0 16px 38px #101d2b1a;}
+body.enterprise-public.theme-minimal-boutique .urban-hero:before{background:linear-gradient(90deg,#262626f2,#262626d9 50%,#26262644);}
+body.enterprise-public.theme-minimal-boutique .urban-kicker{color:#ad8b71;}
+body.enterprise-public.theme-minimal-boutique .urban-btn{background:#a87c52!important;border-radius:10px!important;color:#fff!important;}
+body.enterprise-public.theme-minimal-boutique .urban-btn.ghost{background:transparent!important;border:1px solid #ffffffaa!important;color:#fff!important;}
+body.enterprise-public.theme-minimal-boutique .urban-category-card{border-radius:16px;box-shadow:0 8px 24px #00000013;}
+body.enterprise-public.theme-minimal-boutique .urban-filter-form,body.enterprise-public.theme-minimal-boutique .urban-product-card,body.enterprise-public.theme-minimal-boutique .urban-three-columns>div,body.enterprise-public.theme-minimal-boutique .urban-article-grid article{background:#ffffff;border-color:#a87c5226;color:#262321;box-shadow:0 6px 25px #0000000a;}
+body.enterprise-public.theme-minimal-boutique .urban-filter-form label,body.enterprise-public.theme-minimal-boutique .urban-product-info>small{color:#262321;opacity:.68;}
+body.enterprise-public.theme-minimal-boutique .urban-filter-form input,body.enterprise-public.theme-minimal-boutique .urban-filter-form select{background:#faf9f7;color:#262321;border-color:#a87c5238;}
+body.enterprise-public.theme-minimal-boutique .urban-section-title{border-color:#a87c5230;}
+body.enterprise-public.theme-minimal-boutique .urban-section-title h2,body.enterprise-public.theme-minimal-boutique .urban-product-info h3 a,body.enterprise-public.theme-minimal-boutique .urban-three-columns h3,body.enterprise-public.theme-minimal-boutique .urban-article-grid h3 a{color:#262321;}
+body.enterprise-public.theme-minimal-boutique .urban-section-title span,body.enterprise-public.theme-minimal-boutique .urban-section-title>a,body.enterprise-public.theme-minimal-boutique .urban-price{color:#a87c52;}
+body.enterprise-public.theme-minimal-boutique .urban-product-image{background:#faf9f7;}
+body.enterprise-public.theme-minimal-boutique .urban-sale,body.enterprise-public.theme-minimal-boutique .urban-readmore{background:#a87c52;}
+body.enterprise-public.theme-minimal-boutique .urban-promo{border-radius:18px;}
+body.enterprise-public.theme-minimal-boutique .urban-footer{background:#262626;color:#e1ebf4;}
+body.enterprise-public.theme-minimal-boutique .urban-footer-bottom{background:#262626;border-top:1px solid #ffffff20;}
+body.enterprise-public.theme-minimal-boutique .urban-footer a{color:#e5edf7;}
+body.enterprise-public.theme-minimal-boutique :is(a,button,input,select,textarea):focus-visible{outline:3px solid #ad8b71;outline-offset:2px;}
+body.enterprise-public.theme-minimal-boutique{font-family:Georgia,"Times New Roman",serif;}body.enterprise-public.theme-minimal-boutique .urban-menu a,body.enterprise-public.theme-minimal-boutique .urban-filter-form,body.enterprise-public.theme-minimal-boutique .urban-account-links{font-family:system-ui,sans-serif;}body.enterprise-public.theme-minimal-boutique .urban-product-card{box-shadow:none;border-radius:2px;}body.enterprise-public.theme-minimal-boutique .urban-product-grid{gap:24px;}body.enterprise-public.theme-minimal-boutique .urban-product-image{height:290px;}body.enterprise-public.theme-minimal-boutique .urban-hero{border-radius:3px;}body.enterprise-public.theme-minimal-boutique .urban-section-title h2{font-family:Georgia,serif;font-weight:500;}
+@media(max-width:900px){body.enterprise-public.theme-minimal-boutique .urban-header{grid-template-columns:minmax(0,1fr);grid-template-areas:"brand" "search" "account";gap:14px;}body.enterprise-public.theme-minimal-boutique .urban-menu{overflow-x:auto;justify-content:flex-start;}body.enterprise-public.theme-minimal-boutique .urban-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}body.enterprise-public.theme-minimal-boutique .urban-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:600px){body.enterprise-public.theme-minimal-boutique .urban-layout{width:calc(100% - 24px)!important;}body.enterprise-public.theme-minimal-boutique .urban-product-grid,body.enterprise-public.theme-minimal-boutique .urban-category-grid{grid-template-columns:minmax(0,1fr);}body.enterprise-public.theme-minimal-boutique .urban-header{padding:18px 14px;}body.enterprise-public.theme-minimal-boutique .urban-hero{padding:28px 20px;min-height:320px;}body.enterprise-public.theme-minimal-boutique .urban-hero h1{font-size:clamp(28px,7vw,40px);}body.enterprise-public.theme-minimal-boutique .urban-footer-grid{grid-template-columns:1fr;}}

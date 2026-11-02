@@ -1,0 +1,22 @@
+{
+  "name": "Midnight Premium",
+  "slug": "midnight-premium",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Presentación oscura y refinada para marcas y comercios PRO.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "original",
+    "responsive",
+    "comercios",
+    "noticias",
+    "slider",
+    "mapa"
+  ]
+}

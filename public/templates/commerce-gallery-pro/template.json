@@ -1,0 +1,24 @@
+{
+  "name": "Commerce Gallery PRO",
+  "slug": "commerce-gallery-pro",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Escaparate editorial visual: portada panorámica, galerías fotográficas, fichas de comercios, noticias y perfiles PRO.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "original",
+    "responsive",
+    "galeria",
+    "comercios",
+    "noticias",
+    "slider",
+    "mapa",
+    "perfiles-pro"
+  ]
+}

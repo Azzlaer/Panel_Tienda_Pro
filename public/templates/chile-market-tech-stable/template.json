@@ -1,0 +1,23 @@
+{
+  "name": "ChileMarket Tech Stable",
+  "slug": "chile-market-tech-stable",
+  "version": "1.2.0",
+  "author": "Azzlaer Studio / ComercioSocial",
+  "author_url": "",
+  "description": "Versión estable corregida: cabecera, menú, footer responsive y estilos para noticias.",
+  "min_app_version": "2.0.0",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "marketplace",
+    "tecnologia",
+    "chile",
+    "estable",
+    "responsive",
+    "sin-reordenar-dom"
+  ],
+  "layout_version": "urban-2"
+}

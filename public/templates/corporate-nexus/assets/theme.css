@@ -1,0 +1,35 @@
+/* ComercioSocial v5.2: Corporate Nexus — diseño original, compatible con urban-2. */
+body.enterprise-public.theme-corporate-nexus{--primary:#2563eb;--secondary:#15b8a6;--bg:#f1f5fb;--text:#172b49;--cse-accent:#2563eb;--cse-nav:#0e1f39;--cse-surface:#ffffff;--cse-ink:#172b49;background:#f1f5fb;color:#172b49;}
+body.enterprise-public.theme-corporate-nexus .urban-contactbar{background:#0e1f39;color:#cad5e7;}
+body.enterprise-public.theme-corporate-nexus .urban-header{background:#ffffff;border-bottom:1px solid #2563eb1f;}
+body.enterprise-public.theme-corporate-nexus .urban-header .urban-brand, body.enterprise-public.theme-corporate-nexus .urban-brand b{color:#172b49!important;}
+body.enterprise-public.theme-corporate-nexus .urban-brand>span{background:linear-gradient(135deg,#2563eb,#15b8a6);}
+body.enterprise-public.theme-corporate-nexus .urban-account-links a{color:#172b49;opacity:.83;}
+body.enterprise-public.theme-corporate-nexus .urban-account-links a:last-child{color:#2563eb;opacity:1;}
+body.enterprise-public.theme-corporate-nexus .urban-search input{background:#f1f5fb;border-color:#2563eb33;color:#172b49;}
+body.enterprise-public.theme-corporate-nexus .urban-search button{background:#2563eb;color:#fff;}
+body.enterprise-public.theme-corporate-nexus .urban-menu{background:#0e1f39;}
+body.enterprise-public.theme-corporate-nexus .urban-menu a:hover, body.enterprise-public.theme-corporate-nexus .urban-menu a.publish{background:#2563eb;color:#fff;}
+body.enterprise-public.theme-corporate-nexus .urban-layout{background:transparent!important;}
+body.enterprise-public.theme-corporate-nexus .urban-hero{border-radius:18px;box-shadow:0 16px 38px #101d2b1a;}
+body.enterprise-public.theme-corporate-nexus .urban-hero:before{background:linear-gradient(90deg,#0e1f39f2,#0e1f39d9 50%,#0e1f3944);}
+body.enterprise-public.theme-corporate-nexus .urban-kicker{color:#15b8a6;}
+body.enterprise-public.theme-corporate-nexus .urban-btn{background:#2563eb!important;border-radius:10px!important;color:#fff!important;}
+body.enterprise-public.theme-corporate-nexus .urban-btn.ghost{background:transparent!important;border:1px solid #ffffffaa!important;color:#fff!important;}
+body.enterprise-public.theme-corporate-nexus .urban-category-card{border-radius:16px;box-shadow:0 8px 24px #00000013;}
+body.enterprise-public.theme-corporate-nexus .urban-filter-form,body.enterprise-public.theme-corporate-nexus .urban-product-card,body.enterprise-public.theme-corporate-nexus .urban-three-columns>div,body.enterprise-public.theme-corporate-nexus .urban-article-grid article{background:#ffffff;border-color:#2563eb26;color:#172b49;box-shadow:0 6px 25px #0000000a;}
+body.enterprise-public.theme-corporate-nexus .urban-filter-form label,body.enterprise-public.theme-corporate-nexus .urban-product-info>small{color:#172b49;opacity:.68;}
+body.enterprise-public.theme-corporate-nexus .urban-filter-form input,body.enterprise-public.theme-corporate-nexus .urban-filter-form select{background:#f1f5fb;color:#172b49;border-color:#2563eb38;}
+body.enterprise-public.theme-corporate-nexus .urban-section-title{border-color:#2563eb30;}
+body.enterprise-public.theme-corporate-nexus .urban-section-title h2,body.enterprise-public.theme-corporate-nexus .urban-product-info h3 a,body.enterprise-public.theme-corporate-nexus .urban-three-columns h3,body.enterprise-public.theme-corporate-nexus .urban-article-grid h3 a{color:#172b49;}
+body.enterprise-public.theme-corporate-nexus .urban-section-title span,body.enterprise-public.theme-corporate-nexus .urban-section-title>a,body.enterprise-public.theme-corporate-nexus .urban-price{color:#2563eb;}
+body.enterprise-public.theme-corporate-nexus .urban-product-image{background:#f1f5fb;}
+body.enterprise-public.theme-corporate-nexus .urban-sale,body.enterprise-public.theme-corporate-nexus .urban-readmore{background:#2563eb;}
+body.enterprise-public.theme-corporate-nexus .urban-promo{border-radius:18px;}
+body.enterprise-public.theme-corporate-nexus .urban-footer{background:#0e1f39;color:#e1ebf4;}
+body.enterprise-public.theme-corporate-nexus .urban-footer-bottom{background:#0e1f39;border-top:1px solid #ffffff20;}
+body.enterprise-public.theme-corporate-nexus .urban-footer a{color:#e5edf7;}
+body.enterprise-public.theme-corporate-nexus :is(a,button,input,select,textarea):focus-visible{outline:3px solid #15b8a6;outline-offset:2px;}
+body.enterprise-public.theme-corporate-nexus .urban-header{box-shadow:0 5px 24px #06172d0b;}body.enterprise-public.theme-corporate-nexus .urban-product-card{border-radius:12px;}body.enterprise-public.theme-corporate-nexus .urban-product-card:hover{box-shadow:0 18px 34px #2563eb1f;}
+@media(max-width:900px){body.enterprise-public.theme-corporate-nexus .urban-header{grid-template-columns:minmax(0,1fr);grid-template-areas:"brand" "search" "account";gap:14px;}body.enterprise-public.theme-corporate-nexus .urban-menu{overflow-x:auto;justify-content:flex-start;}body.enterprise-public.theme-corporate-nexus .urban-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}body.enterprise-public.theme-corporate-nexus .urban-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:600px){body.enterprise-public.theme-corporate-nexus .urban-layout{width:calc(100% - 24px)!important;}body.enterprise-public.theme-corporate-nexus .urban-product-grid,body.enterprise-public.theme-corporate-nexus .urban-category-grid{grid-template-columns:minmax(0,1fr);}body.enterprise-public.theme-corporate-nexus .urban-header{padding:18px 14px;}body.enterprise-public.theme-corporate-nexus .urban-hero{padding:28px 20px;min-height:320px;}body.enterprise-public.theme-corporate-nexus .urban-hero h1{font-size:clamp(28px,7vw,40px);}body.enterprise-public.theme-corporate-nexus .urban-footer-grid{grid-template-columns:1fr;}}

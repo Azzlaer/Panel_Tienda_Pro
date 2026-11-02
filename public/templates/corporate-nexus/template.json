@@ -1,0 +1,22 @@
+{
+  "name": "Corporate Nexus",
+  "slug": "corporate-nexus",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Panel profesional y directorio de locales; continuidad Corporate Blue.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "original",
+    "responsive",
+    "comercios",
+    "noticias",
+    "slider",
+    "mapa"
+  ]
+}

@@ -1,0 +1,170 @@
+
+/* Estructura fundamental v1.2: no depende del tema Urban original */
+.theme-chile-market-tech-stable .urban-contactbar{display:flex!important;justify-content:space-between!important;align-items:center!important;width:calc(100% - 24px);max-width:1180px!important}
+.theme-chile-market-tech-stable .urban-contactbar>div{display:flex!important;align-items:center;gap:18px;flex-wrap:wrap}
+.theme-chile-market-tech-stable .urban-header{display:grid!important;width:calc(100% - 24px);max-width:1180px!important;align-items:center!important}
+.theme-chile-market-tech-stable .urban-brand{grid-area:brand!important;display:flex!important;align-items:center!important;gap:10px!important;min-width:0}
+.theme-chile-market-tech-stable .urban-brand span{display:grid!important;place-items:center!important;width:42px!important;height:42px!important;flex:0 0 42px}
+.theme-chile-market-tech-stable .urban-brand b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.theme-chile-market-tech-stable .urban-account-links{grid-area:account!important;justify-self:end!important;display:flex!important;align-items:center!important;gap:14px!important;flex-wrap:wrap}
+.theme-chile-market-tech-stable .urban-search{grid-area:search!important;justify-self:end!important;display:flex!important;margin:0!important}
+.theme-chile-market-tech-stable .urban-search input{width:100%!important;min-width:0!important;padding:0 14px!important}
+.theme-chile-market-tech-stable .urban-search button{display:grid!important;place-items:center!important;border:0!important}
+.theme-chile-market-tech-stable .urban-menu{display:flex!important;align-items:stretch!important;width:calc(100% - 24px);max-width:1180px!important;overflow-x:auto;scrollbar-width:thin}
+.theme-chile-market-tech-stable .urban-menu a{display:flex!important;align-items:center!important;justify-content:center!important;color:#fff!important;white-space:nowrap!important;text-decoration:none!important}
+.theme-chile-market-tech-stable .urban-layout{width:calc(100% - 24px);max-width:1180px!important}
+.theme-chile-market-tech-stable .urban-footer{display:block!important;width:calc(100% - 24px);max-width:1180px!important;margin-top:24px!important;color:#dce2e6!important}
+.theme-chile-market-tech-stable .urban-footer-grid{display:grid!important;grid-template-columns:1.25fr 1fr 1fr 1.15fr!important}
+.theme-chile-market-tech-stable .urban-footer-grid section{min-width:0!important}
+.theme-chile-market-tech-stable .urban-footer-grid a{display:block!important;color:#dce2e6!important}
+.theme-chile-market-tech-stable .urban-footer .urban-brand{display:flex!important;color:#fff!important}
+.theme-chile-market-tech-stable .urban-footer-bottom{display:flex!important;justify-content:space-between!important;gap:18px!important;color:#c8d0d5!important}
+.theme-chile-market-tech-stable .urban-category-card{display:flex!important;flex-direction:column!important;justify-content:flex-end!important;color:#fff!important}
+.theme-chile-market-tech-stable .urban-category-card span,.theme-chile-market-tech-stable .urban-category-card small{color:#fff!important;text-shadow:0 1px 4px rgba(0,0,0,.75)}
+
+/* ChileMarket Tech Stable 1.1.0
+   Tema visual sin reordenamiento del DOM. */
+body.theme-chile-market-tech-stable{
+  --cmt-orange:#f47a00;
+  --cmt-blue:#1976b9;
+  --cmt-green:#2bae4a;
+  --cmt-dark:#3f454a;
+  --cmt-border:#e1e5e8;
+  --cmt-muted:#7b858c;
+  --cmt-bg:#f2f3f4;
+  background:var(--cmt-bg);
+  color:#515a60;
+  font-family:Arial,"Segoe UI",sans-serif;
+}
+body.theme-chile-market-tech-stable *{box-sizing:border-box}
+body.theme-chile-market-tech-stable a{text-decoration:none}
+
+/* Cabecera */
+.theme-chile-market-tech-stable .urban-contactbar,
+.theme-chile-market-tech-stable .urban-header,
+.theme-chile-market-tech-stable .urban-menu,
+.theme-chile-market-tech-stable .urban-layout,
+.theme-chile-market-tech-stable .urban-footer{max-width:1180px;margin-left:auto;margin-right:auto}
+.theme-chile-market-tech-stable .urban-contactbar{height:34px;padding:0 18px;background:#fff;border-bottom:1px solid #eceff1;color:#7e878d;font-size:11px}
+.theme-chile-market-tech-stable .urban-header{min-height:104px;padding:18px 22px;background:#fff;grid-template-columns:235px 1fr;grid-template-areas:"brand account" "brand search"}
+.theme-chile-market-tech-stable .urban-brand{font-size:27px;font-weight:800;color:#555!important;letter-spacing:-1px}
+.theme-chile-market-tech-stable .urban-brand span{border-radius:8px;background:linear-gradient(135deg,var(--cmt-orange),#ffae00);box-shadow:0 5px 14px rgba(244,122,0,.24)}
+.theme-chile-market-tech-stable .urban-brand b{font-weight:800}
+.theme-chile-market-tech-stable .urban-account-links a{color:#6e777d;font-size:11px}
+.theme-chile-market-tech-stable .urban-search{width:min(650px,100%);height:42px}
+.theme-chile-market-tech-stable .urban-search input{height:42px;border:1px solid var(--cmt-border);border-radius:3px 0 0 3px;font-size:12px;background:#fff}
+.theme-chile-market-tech-stable .urban-search button{height:42px;min-width:60px;border-radius:0 3px 3px 0;background:var(--cmt-blue);color:#fff}
+.theme-chile-market-tech-stable .urban-menu{min-height:46px;height:auto;padding:0 10px;background:var(--cmt-dark);border-radius:3px 3px 0 0}
+.theme-chile-market-tech-stable .urban-menu a{min-height:46px;padding:0 16px;font-size:11px;border-color:rgba(255,255,255,.08)}
+.theme-chile-market-tech-stable .urban-menu a:hover,
+.theme-chile-market-tech-stable .urban-menu a.publish{background:var(--cmt-orange)}
+
+/* Contenedor principal: conserva el flujo original */
+.theme-chile-market-tech-stable .urban-layout{display:block!important;margin-top:18px!important;padding:0!important;background:#fff;box-shadow:0 7px 28px rgba(35,45,52,.07);overflow:hidden}
+
+/* Hero */
+.theme-chile-market-tech-stable .urban-hero{min-height:360px;padding:42px 52px;justify-content:flex-start;background-position:center;background-size:cover;position:relative;isolation:isolate}
+.theme-chile-market-tech-stable .urban-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(45,33,54,.82),rgba(75,39,91,.45),rgba(255,255,255,.08));pointer-events:none}
+.theme-chile-market-tech-stable .urban-hero-copy{max-width:510px;color:#fff}
+.theme-chile-market-tech-stable .urban-kicker{color:#fff;font-size:12px;letter-spacing:.14em}
+.theme-chile-market-tech-stable .urban-hero h1{margin:9px 0 13px;color:#fff;font-size:44px;line-height:1.04;text-transform:none;text-shadow:0 2px 12px rgba(0,0,0,.22)}
+.theme-chile-market-tech-stable .urban-hero p{color:#fff;font-size:15px;line-height:1.6}
+.theme-chile-market-tech-stable .urban-btn{border-radius:3px!important;padding:12px 19px!important;background:#fff!important;color:#3f454a!important;font-size:11px;font-weight:800}
+.theme-chile-market-tech-stable .urban-btn.ghost{background:transparent!important;color:#fff!important;border-color:rgba(255,255,255,.72)}
+
+/* Categorías */
+.theme-chile-market-tech-stable .urban-category-grid{padding:24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;background:#f8f9fa}
+.theme-chile-market-tech-stable .urban-category-card{height:145px;padding:17px;border-radius:2px;box-shadow:0 3px 10px rgba(0,0,0,.08);transition:transform .2s ease,box-shadow .2s ease}
+.theme-chile-market-tech-stable .urban-category-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.13)}
+
+/* Secciones */
+.theme-chile-market-tech-stable .urban-section{padding:24px;margin:0;background:#fff}
+.theme-chile-market-tech-stable .urban-section+.urban-section{border-top:1px solid var(--cmt-border)}
+.theme-chile-market-tech-stable .urban-section-title{margin-bottom:15px;border-bottom:1px solid var(--cmt-border);align-items:end}
+.theme-chile-market-tech-stable .urban-section-title span{color:var(--cmt-orange);font-size:10px;font-weight:800;letter-spacing:.08em}
+.theme-chile-market-tech-stable .urban-section-title h2{margin:4px 0 11px;color:#41494e;font-size:16px;font-weight:600}
+.theme-chile-market-tech-stable .urban-section-title>a{margin-bottom:11px;color:var(--cmt-blue);font-size:10px;font-weight:700}
+
+/* Productos */
+.theme-chile-market-tech-stable .urban-product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #edf0f2;border-left:1px solid #edf0f2}
+.theme-chile-market-tech-stable .urban-product-card{min-width:0;background:#fff;border:0;border-right:1px solid #edf0f2;border-bottom:1px solid #edf0f2;transition:box-shadow .2s ease,transform .2s ease}
+.theme-chile-market-tech-stable .urban-product-card:hover{position:relative;z-index:2;transform:translateY(-2px);box-shadow:0 11px 28px rgba(35,45,52,.13)}
+.theme-chile-market-tech-stable .urban-product-image{height:210px;padding:13px;background:#fff}
+.theme-chile-market-tech-stable .urban-product-image img{width:100%;height:100%;object-fit:contain}
+.theme-chile-market-tech-stable .urban-sale{top:8px;right:8px;padding:5px 7px;border-radius:2px;background:var(--cmt-green);font-size:8px}
+.theme-chile-market-tech-stable .urban-product-info{padding:12px 13px 15px;text-align:left}
+.theme-chile-market-tech-stable .urban-product-info>small{font-size:9px;color:#969ea3}
+.theme-chile-market-tech-stable .urban-product-info h3{min-height:35px;margin:6px 0;font-size:12px;line-height:1.45}
+.theme-chile-market-tech-stable .urban-product-info h3 a{color:#50595f}
+.theme-chile-market-tech-stable .urban-price{color:#2f373c;font-size:14px}
+.theme-chile-market-tech-stable .urban-seller{justify-content:flex-start;margin-top:10px;padding-top:9px}
+.theme-chile-market-tech-stable .urban-seller img{width:28px;height:28px}
+.theme-chile-market-tech-stable .urban-seller span{font-size:9px}
+.theme-chile-market-tech-stable .stars{color:#efb31b}
+
+/* Promoción */
+.theme-chile-market-tech-stable .urban-promo{min-height:190px;margin:0;padding:35px;background-position:center;background-size:cover}
+.theme-chile-market-tech-stable .urban-promo h2{font-size:30px}
+.theme-chile-market-tech-stable .urban-promo p{font-size:14px}
+
+/* Rankings */
+.theme-chile-market-tech-stable .urban-three-columns{padding:28px 24px;gap:28px;background:#fff;border-top:1px solid var(--cmt-border);border-bottom:1px solid var(--cmt-border)}
+.theme-chile-market-tech-stable .urban-three-columns h3{color:#424a4f;font-size:11px;font-weight:700}
+.theme-chile-market-tech-stable .urban-mini-product{padding:9px 0;color:#596268!important}
+.theme-chile-market-tech-stable .urban-mini-product img{width:55px;height:55px;object-fit:contain;background:#fff;border:1px solid #edf0f2}
+.theme-chile-market-tech-stable .urban-mini-product span{font-size:11px}
+
+/* Noticias */
+.theme-chile-market-tech-stable .urban-article-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.theme-chile-market-tech-stable .urban-article-grid article{background:#f7f8f9;border:1px solid var(--cmt-border)}
+.theme-chile-market-tech-stable .urban-article-grid img{height:155px}
+.theme-chile-market-tech-stable .urban-article-grid article>div{padding:13px}
+.theme-chile-market-tech-stable .urban-article-grid h3{font-size:13px}
+.theme-chile-market-tech-stable .urban-readmore{background:var(--cmt-blue);border-radius:2px}
+
+/* Footer */
+.theme-chile-market-tech-stable .urban-footer{background:#454b50}
+.theme-chile-market-tech-stable .urban-footer-grid{padding:36px 38px;gap:32px}
+.theme-chile-market-tech-stable .urban-footer-bottom{padding:16px 38px;background:#383d41}
+
+/* Formularios y páginas internas: mejoras suaves sin alterar estructura */
+.theme-chile-market-tech-stable input,
+.theme-chile-market-tech-stable select,
+.theme-chile-market-tech-stable textarea{border-color:#dce1e4}
+.theme-chile-market-tech-stable .btn{border-radius:3px}
+.theme-chile-market-tech-stable .flash{max-width:1180px;margin-left:auto;margin-right:auto}
+
+@media(max-width:950px){
+  .theme-chile-market-tech-stable .urban-product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .theme-chile-market-tech-stable .urban-article-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .theme-chile-market-tech-stable .urban-header{grid-template-columns:1fr;grid-template-areas:"brand" "search" "account";gap:12px;padding:17px}
+  .theme-chile-market-tech-stable .urban-search,.theme-chile-market-tech-stable .urban-account-links{justify-self:stretch}
+  .theme-chile-market-tech-stable .urban-account-links{flex-wrap:wrap}
+  .theme-chile-market-tech-stable .urban-menu{overflow-x:auto;flex-wrap:nowrap}
+}
+@media(max-width:700px){
+  .theme-chile-market-tech-stable .urban-contactbar{display:none}
+  .theme-chile-market-tech-stable .urban-category-grid{grid-template-columns:1fr 1fr;padding:16px}
+  .theme-chile-market-tech-stable .urban-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .theme-chile-market-tech-stable .urban-three-columns{grid-template-columns:1fr}
+  .theme-chile-market-tech-stable .urban-hero{min-height:310px;padding:30px 24px}
+  .theme-chile-market-tech-stable .urban-hero h1{font-size:34px}
+  .theme-chile-market-tech-stable .urban-section{padding:18px}
+  .theme-chile-market-tech-stable .urban-footer-grid{grid-template-columns:1fr 1fr;padding:28px 20px}
+}
+@media(max-width:480px){
+  .theme-chile-market-tech-stable .urban-category-grid,
+  .theme-chile-market-tech-stable .urban-product-grid,
+  .theme-chile-market-tech-stable .urban-article-grid,
+  .theme-chile-market-tech-stable .urban-footer-grid{grid-template-columns:1fr}
+  .theme-chile-market-tech-stable .urban-product-image{height:270px}
+  .theme-chile-market-tech-stable .urban-hero h1{font-size:29px}
+  .theme-chile-market-tech-stable .urban-footer-bottom{padding:16px 20px;display:block}
+}
+
+
+/* Noticias */
+.theme-chile-market-tech-stable .news-home-card{position:relative;overflow:hidden}.theme-chile-market-tech-stable .news-featured-badge{position:absolute;z-index:2;top:8px;right:8px;background:var(--cmt-orange);color:#fff;padding:6px 8px;font-size:9px}.theme-chile-market-tech-stable .public-news-detail{max-width:920px;margin:0 auto;background:#fff}.theme-chile-market-tech-stable .public-news-cover{width:100%;max-height:480px;object-fit:cover}.theme-chile-market-tech-stable .public-news-body{padding:38px 46px}.theme-chile-market-tech-stable .news-meta{display:flex;justify-content:space-between;gap:15px;color:#88939a;font-size:12px}.theme-chile-market-tech-stable .news-meta span{color:var(--cmt-orange);font-weight:800}.theme-chile-market-tech-stable .public-news-body h1{font-size:36px;line-height:1.15;color:#30383d;margin:14px 0}.theme-chile-market-tech-stable .news-author{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--cmt-border);padding-bottom:18px}.theme-chile-market-tech-stable .news-author img{width:42px;height:42px;border-radius:50%;object-fit:cover}.theme-chile-market-tech-stable .news-lead{font-size:19px;line-height:1.6;color:#59636a}.theme-chile-market-tech-stable .news-rich-content{font-size:16px;line-height:1.75;color:#414b51;overflow-wrap:anywhere}.theme-chile-market-tech-stable .news-rich-content img{max-width:100%;height:auto;border-radius:3px}.theme-chile-market-tech-stable .news-rich-content blockquote{margin:22px 0;padding:16px 20px;background:#f2f7fa;border-left:5px solid var(--cmt-blue)}.theme-chile-market-tech-stable .news-rich-content table{width:100%;border-collapse:collapse;display:block;overflow-x:auto}.theme-chile-market-tech-stable .news-rich-content td,.theme-chile-market-tech-stable .news-rich-content th{padding:9px;border:1px solid var(--cmt-border)}.theme-chile-market-tech-stable .news-embed{position:relative;padding-top:56.25%;margin:22px 0}.theme-chile-market-tech-stable .news-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.theme-chile-market-tech-stable .news-share{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;padding-top:20px;border-top:1px solid var(--cmt-border)}
+
+@media(max-width:950px){.theme-chile-market-tech-stable .urban-header{grid-template-columns:1fr!important;grid-template-areas:"brand" "search" "account"!important}.theme-chile-market-tech-stable .urban-search,.theme-chile-market-tech-stable .urban-account-links{justify-self:stretch!important}.theme-chile-market-tech-stable .urban-footer-grid{grid-template-columns:1fr 1fr!important}}
+@media(max-width:700px){.theme-chile-market-tech-stable .urban-header,.theme-chile-market-tech-stable .urban-menu,.theme-chile-market-tech-stable .urban-layout,.theme-chile-market-tech-stable .urban-footer{width:100%!important}.theme-chile-market-tech-stable .urban-brand{font-size:22px!important}.theme-chile-market-tech-stable .urban-account-links{gap:10px!important}.theme-chile-market-tech-stable .urban-menu{padding:0!important}.theme-chile-market-tech-stable .urban-menu a{padding:0 13px!important}.theme-chile-market-tech-stable .urban-footer-grid{grid-template-columns:1fr!important}.theme-chile-market-tech-stable .urban-footer-bottom{display:block!important}.theme-chile-market-tech-stable .urban-footer-bottom span{display:block;margin-top:8px}.theme-chile-market-tech-stable .public-news-body{padding:24px 20px}.theme-chile-market-tech-stable .public-news-body h1{font-size:28px}.theme-chile-market-tech-stable .news-meta{display:block}.theme-chile-market-tech-stable .news-meta time{display:block;margin-top:6px}}

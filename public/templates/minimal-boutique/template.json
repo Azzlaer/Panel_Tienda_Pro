@@ -1,0 +1,22 @@
+{
+  "name": "Boutique Minimal",
+  "slug": "minimal-boutique",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Diseño editorial y minimalista para tiendas, productos y noticias.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "original",
+    "responsive",
+    "comercios",
+    "noticias",
+    "slider",
+    "mapa"
+  ]
+}

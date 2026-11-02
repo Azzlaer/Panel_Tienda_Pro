@@ -1,0 +1,35 @@
+/* ComercioSocial v5.2: Mall Directory Pro — diseño original, compatible con urban-2. */
+body.enterprise-public.theme-mall-directory{--primary:#0891b2;--secondary:#14b8a6;--bg:#f0f8f9;--text:#113941;--cse-accent:#0891b2;--cse-nav:#0e3742;--cse-surface:#ffffff;--cse-ink:#113941;background:#f0f8f9;color:#113941;}
+body.enterprise-public.theme-mall-directory .urban-contactbar{background:#0e3742;color:#cad5e7;}
+body.enterprise-public.theme-mall-directory .urban-header{background:#ffffff;border-bottom:1px solid #0891b21f;}
+body.enterprise-public.theme-mall-directory .urban-header .urban-brand, body.enterprise-public.theme-mall-directory .urban-brand b{color:#113941!important;}
+body.enterprise-public.theme-mall-directory .urban-brand>span{background:linear-gradient(135deg,#0891b2,#14b8a6);}
+body.enterprise-public.theme-mall-directory .urban-account-links a{color:#113941;opacity:.83;}
+body.enterprise-public.theme-mall-directory .urban-account-links a:last-child{color:#0891b2;opacity:1;}
+body.enterprise-public.theme-mall-directory .urban-search input{background:#f0f8f9;border-color:#0891b233;color:#113941;}
+body.enterprise-public.theme-mall-directory .urban-search button{background:#0891b2;color:#fff;}
+body.enterprise-public.theme-mall-directory .urban-menu{background:#0e3742;}
+body.enterprise-public.theme-mall-directory .urban-menu a:hover, body.enterprise-public.theme-mall-directory .urban-menu a.publish{background:#0891b2;color:#fff;}
+body.enterprise-public.theme-mall-directory .urban-layout{background:transparent!important;}
+body.enterprise-public.theme-mall-directory .urban-hero{border-radius:18px;box-shadow:0 16px 38px #101d2b1a;}
+body.enterprise-public.theme-mall-directory .urban-hero:before{background:linear-gradient(90deg,#0e3742f2,#0e3742d9 50%,#0e374244);}
+body.enterprise-public.theme-mall-directory .urban-kicker{color:#14b8a6;}
+body.enterprise-public.theme-mall-directory .urban-btn{background:#0891b2!important;border-radius:10px!important;color:#fff!important;}
+body.enterprise-public.theme-mall-directory .urban-btn.ghost{background:transparent!important;border:1px solid #ffffffaa!important;color:#fff!important;}
+body.enterprise-public.theme-mall-directory .urban-category-card{border-radius:16px;box-shadow:0 8px 24px #00000013;}
+body.enterprise-public.theme-mall-directory .urban-filter-form,body.enterprise-public.theme-mall-directory .urban-product-card,body.enterprise-public.theme-mall-directory .urban-three-columns>div,body.enterprise-public.theme-mall-directory .urban-article-grid article{background:#ffffff;border-color:#0891b226;color:#113941;box-shadow:0 6px 25px #0000000a;}
+body.enterprise-public.theme-mall-directory .urban-filter-form label,body.enterprise-public.theme-mall-directory .urban-product-info>small{color:#113941;opacity:.68;}
+body.enterprise-public.theme-mall-directory .urban-filter-form input,body.enterprise-public.theme-mall-directory .urban-filter-form select{background:#f0f8f9;color:#113941;border-color:#0891b238;}
+body.enterprise-public.theme-mall-directory .urban-section-title{border-color:#0891b230;}
+body.enterprise-public.theme-mall-directory .urban-section-title h2,body.enterprise-public.theme-mall-directory .urban-product-info h3 a,body.enterprise-public.theme-mall-directory .urban-three-columns h3,body.enterprise-public.theme-mall-directory .urban-article-grid h3 a{color:#113941;}
+body.enterprise-public.theme-mall-directory .urban-section-title span,body.enterprise-public.theme-mall-directory .urban-section-title>a,body.enterprise-public.theme-mall-directory .urban-price{color:#0891b2;}
+body.enterprise-public.theme-mall-directory .urban-product-image{background:#f0f8f9;}
+body.enterprise-public.theme-mall-directory .urban-sale,body.enterprise-public.theme-mall-directory .urban-readmore{background:#0891b2;}
+body.enterprise-public.theme-mall-directory .urban-promo{border-radius:18px;}
+body.enterprise-public.theme-mall-directory .urban-footer{background:#0e3742;color:#e1ebf4;}
+body.enterprise-public.theme-mall-directory .urban-footer-bottom{background:#0e3742;border-top:1px solid #ffffff20;}
+body.enterprise-public.theme-mall-directory .urban-footer a{color:#e5edf7;}
+body.enterprise-public.theme-mall-directory :is(a,button,input,select,textarea):focus-visible{outline:3px solid #14b8a6;outline-offset:2px;}
+body.enterprise-public.theme-mall-directory .urban-menu a[href*="map.php"],body.enterprise-public.theme-mall-directory .urban-menu a[href*="commerces.php"]{background:#0891b22c;color:white;}body.enterprise-public.theme-mall-directory .urban-category-card{border:3px solid #ffffff88;}body.enterprise-public.theme-mall-directory .urban-product-card{border-radius:14px;}body.enterprise-public.theme-mall-directory .urban-section-title h2{letter-spacing:-.03em;}
+@media(max-width:900px){body.enterprise-public.theme-mall-directory .urban-header{grid-template-columns:minmax(0,1fr);grid-template-areas:"brand" "search" "account";gap:14px;}body.enterprise-public.theme-mall-directory .urban-menu{overflow-x:auto;justify-content:flex-start;}body.enterprise-public.theme-mall-directory .urban-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}body.enterprise-public.theme-mall-directory .urban-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:600px){body.enterprise-public.theme-mall-directory .urban-layout{width:calc(100% - 24px)!important;}body.enterprise-public.theme-mall-directory .urban-product-grid,body.enterprise-public.theme-mall-directory .urban-category-grid{grid-template-columns:minmax(0,1fr);}body.enterprise-public.theme-mall-directory .urban-header{padding:18px 14px;}body.enterprise-public.theme-mall-directory .urban-hero{padding:28px 20px;min-height:320px;}body.enterprise-public.theme-mall-directory .urban-hero h1{font-size:clamp(28px,7vw,40px);}body.enterprise-public.theme-mall-directory .urban-footer-grid{grid-template-columns:1fr;}}

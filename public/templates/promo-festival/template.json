@@ -1,0 +1,22 @@
+{
+  "name": "Promo Festival",
+  "slug": "promo-festival",
+  "version": "1.0.0",
+  "author": "ComercioSocial Enterprise / Azzlaer",
+  "description": "Protagonismo para banners, promociones, descuentos y novedades.",
+  "min_app_version": "2.0.0",
+  "layout_version": "urban-2",
+  "styles": [
+    "assets/theme.css"
+  ],
+  "scripts": [],
+  "preview": "assets/preview.svg",
+  "tags": [
+    "original",
+    "responsive",
+    "comercios",
+    "noticias",
+    "slider",
+    "mapa"
+  ]
+}

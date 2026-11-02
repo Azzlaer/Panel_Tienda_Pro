@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<rect width="1200" height="720" fill="#f2f3f4"/>
+<rect x="70" y="22" width="1060" height="24" rx="2" fill="#f47a00"/>
+<rect x="70" y="54" width="1060" height="82" fill="#fff"/>
+<rect x="100" y="77" width="150" height="34" rx="8" fill="#ff9a17"/>
+<rect x="350" y="76" width="500" height="38" rx="3" fill="#eef1f3"/>
+<rect x="850" y="76" width="110" height="38" rx="3" fill="#1976b9"/>
+<rect x="70" y="136" width="1060" height="42" fill="#3f454a"/>
+<rect x="70" y="194" width="1060" height="240" fill="#7c3d75"/>
+<path d="M70 434V194h1060v240z" fill="url(#g)"/>
+<text x="125" y="284" fill="#fff" font-family="Arial" font-size="15" font-weight="700">COMERCIO LOCAL · CHILE</text>
+<text x="125" y="330" fill="#fff" font-family="Arial" font-size="42" font-weight="700">Tecnología y ofertas</text>
+<rect x="125" y="355" width="145" height="38" rx="3" fill="#fff"/>
+<text x="154" y="379" fill="#3f454a" font-family="Arial" font-size="12" font-weight="700">VER CATÁLOGO</text>
+<g transform="translate(70 452)">
+<rect width="1060" height="226" fill="#fff"/>
+<text x="24" y="34" fill="#3f454a" font-family="Arial" font-size="16" font-weight="700">NUEVOS PRODUCTOS</text>
+<g transform="translate(24 52)"><rect width="242" height="150" fill="#fafafa" stroke="#e1e5e8"/><rect x="50" y="18" width="142" height="72" rx="5" fill="#dce5ea"/><rect x="15" y="104" width="130" height="10" fill="#c9d0d4"/><rect x="15" y="124" width="75" height="12" fill="#2f373c"/></g>
+<g transform="translate(280 52)"><rect width="242" height="150" fill="#fafafa" stroke="#e1e5e8"/><rect x="50" y="18" width="142" height="72" rx="5" fill="#dce5ea"/><rect x="15" y="104" width="130" height="10" fill="#c9d0d4"/><rect x="15" y="124" width="75" height="12" fill="#2f373c"/></g>
+<g transform="translate(536 52)"><rect width="242" height="150" fill="#fafafa" stroke="#e1e5e8"/><rect x="50" y="18" width="142" height="72" rx="5" fill="#dce5ea"/><rect x="15" y="104" width="130" height="10" fill="#c9d0d4"/><rect x="15" y="124" width="75" height="12" fill="#2f373c"/></g>
+<g transform="translate(792 52)"><rect width="242" height="150" fill="#fafafa" stroke="#e1e5e8"/><rect x="50" y="18" width="142" height="72" rx="5" fill="#dce5ea"/><rect x="15" y="104" width="130" height="10" fill="#c9d0d4"/><rect x="15" y="124" width="75" height="12" fill="#2f373c"/></g>
+</g>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#4d285d" stop-opacity=".92"/><stop offset=".58" stop-color="#d14e64" stop-opacity=".55"/><stop offset="1" stop-color="#ff9a3e" stop-opacity=".25"/></linearGradient></defs>
+</svg>

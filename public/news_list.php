@@ -1,0 +1,9 @@
+<?php
+require_once __DIR__.'/../app/bootstrap.php';ensure_news_schema();
+$page=max(1,(int)($_GET['page']??1));$per=12;$count=(int)db()->query("SELECT COUNT(*) FROM news WHERE status='published'")->fetchColumn();$pages=max(1,(int)ceil($count/$per));$page=min($page,$pages);$offset=($page-1)*$per;
+$items=db()->query("SELECT n.*,u.username,p.display_name FROM news n JOIN users u ON u.id=n.created_by LEFT JOIN profiles p ON p.user_id=u.id WHERE n.status='published' ORDER BY n.featured DESC, COALESCE(n.published_at,n.created_at) DESC LIMIT $per OFFSET $offset")->fetchAll();
+$pageTitle='Noticias';$pageDescription='Últimas novedades, anuncios y noticias de nuestra comunidad.';require __DIR__.'/../partials/header.php';?>
+<section class="directory-heading"><span class="directory-kicker">ACTUALIDAD</span><h1>Noticias y novedades</h1><p>Entérate de los eventos, anuncios e historias de nuestros comercios.</p></section>
+<section class="directory-grid"><?php foreach($items as $n):?><a class="directory-card" href="<?=url('news.php?id='.$n['id'])?>"><div class="directory-image"><img loading="lazy" src="<?=url($n['cover_image']?:'assets/cover.svg')?>" alt="<?=e($n['title'])?>"><?php if($n['featured']):?><span>★ Destacada</span><?php endif;?></div><div class="directory-info"><small><?=date('d/m/Y',strtotime($n['published_at']?:$n['created_at']))?></small><h2><?=e($n['title'])?></h2><p><?=e(news_excerpt($n,180))?></p><strong>Leer noticia →</strong></div></a><?php endforeach;?></section><?php if(!$items):?><div class="directory-empty">Todavía no hay noticias publicadas.</div><?php endif;?>
+<?php if($pages>1):?><nav class="directory-pages" aria-label="Páginas"><?php for($i=1;$i<=$pages;$i++):?><a class="<?=$i===$page?'active':''?>" href="?page=<?=$i?>"><?=$i?></a><?php endfor;?></nav><?php endif;?>
+<?php require __DIR__.'/../partials/footer.php';

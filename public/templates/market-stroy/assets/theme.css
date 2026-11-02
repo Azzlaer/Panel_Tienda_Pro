@@ -1,0 +1,35 @@
+/* ComercioSocial v5.2: Market Navigator — diseño original, compatible con urban-2. */
+body.enterprise-public.theme-market-stroy{--primary:#f97316;--secondary:#0284c7;--bg:#f8fafc;--text:#263245;--cse-accent:#f97316;--cse-nav:#162b46;--cse-surface:#ffffff;--cse-ink:#263245;background:#f8fafc;color:#263245;}
+body.enterprise-public.theme-market-stroy .urban-contactbar{background:#162b46;color:#cad5e7;}
+body.enterprise-public.theme-market-stroy .urban-header{background:#ffffff;border-bottom:1px solid #f973161f;}
+body.enterprise-public.theme-market-stroy .urban-header .urban-brand, body.enterprise-public.theme-market-stroy .urban-brand b{color:#263245!important;}
+body.enterprise-public.theme-market-stroy .urban-brand>span{background:linear-gradient(135deg,#f97316,#0284c7);}
+body.enterprise-public.theme-market-stroy .urban-account-links a{color:#263245;opacity:.83;}
+body.enterprise-public.theme-market-stroy .urban-account-links a:last-child{color:#f97316;opacity:1;}
+body.enterprise-public.theme-market-stroy .urban-search input{background:#f8fafc;border-color:#f9731633;color:#263245;}
+body.enterprise-public.theme-market-stroy .urban-search button{background:#f97316;color:#fff;}
+body.enterprise-public.theme-market-stroy .urban-menu{background:#162b46;}
+body.enterprise-public.theme-market-stroy .urban-menu a:hover, body.enterprise-public.theme-market-stroy .urban-menu a.publish{background:#f97316;color:#fff;}
+body.enterprise-public.theme-market-stroy .urban-layout{background:transparent!important;}
+body.enterprise-public.theme-market-stroy .urban-hero{border-radius:18px;box-shadow:0 16px 38px #101d2b1a;}
+body.enterprise-public.theme-market-stroy .urban-hero:before{background:linear-gradient(90deg,#162b46f2,#162b46d9 50%,#162b4644);}
+body.enterprise-public.theme-market-stroy .urban-kicker{color:#0284c7;}
+body.enterprise-public.theme-market-stroy .urban-btn{background:#f97316!important;border-radius:10px!important;color:#fff!important;}
+body.enterprise-public.theme-market-stroy .urban-btn.ghost{background:transparent!important;border:1px solid #ffffffaa!important;color:#fff!important;}
+body.enterprise-public.theme-market-stroy .urban-category-card{border-radius:16px;box-shadow:0 8px 24px #00000013;}
+body.enterprise-public.theme-market-stroy .urban-filter-form,body.enterprise-public.theme-market-stroy .urban-product-card,body.enterprise-public.theme-market-stroy .urban-three-columns>div,body.enterprise-public.theme-market-stroy .urban-article-grid article{background:#ffffff;border-color:#f9731626;color:#263245;box-shadow:0 6px 25px #0000000a;}
+body.enterprise-public.theme-market-stroy .urban-filter-form label,body.enterprise-public.theme-market-stroy .urban-product-info>small{color:#263245;opacity:.68;}
+body.enterprise-public.theme-market-stroy .urban-filter-form input,body.enterprise-public.theme-market-stroy .urban-filter-form select{background:#f8fafc;color:#263245;border-color:#f9731638;}
+body.enterprise-public.theme-market-stroy .urban-section-title{border-color:#f9731630;}
+body.enterprise-public.theme-market-stroy .urban-section-title h2,body.enterprise-public.theme-market-stroy .urban-product-info h3 a,body.enterprise-public.theme-market-stroy .urban-three-columns h3,body.enterprise-public.theme-market-stroy .urban-article-grid h3 a{color:#263245;}
+body.enterprise-public.theme-market-stroy .urban-section-title span,body.enterprise-public.theme-market-stroy .urban-section-title>a,body.enterprise-public.theme-market-stroy .urban-price{color:#f97316;}
+body.enterprise-public.theme-market-stroy .urban-product-image{background:#f8fafc;}
+body.enterprise-public.theme-market-stroy .urban-sale,body.enterprise-public.theme-market-stroy .urban-readmore{background:#f97316;}
+body.enterprise-public.theme-market-stroy .urban-promo{border-radius:18px;}
+body.enterprise-public.theme-market-stroy .urban-footer{background:#162b46;color:#e1ebf4;}
+body.enterprise-public.theme-market-stroy .urban-footer-bottom{background:#162b46;border-top:1px solid #ffffff20;}
+body.enterprise-public.theme-market-stroy .urban-footer a{color:#e5edf7;}
+body.enterprise-public.theme-market-stroy :is(a,button,input,select,textarea):focus-visible{outline:3px solid #0284c7;outline-offset:2px;}
+body.enterprise-public.theme-market-stroy .urban-menu{justify-content:flex-start;padding-inline:max(22px,calc((100vw - 1300px)/2));}body.enterprise-public.theme-market-stroy .urban-category-grid{grid-template-columns:repeat(3,minmax(0,1fr));}body.enterprise-public.theme-market-stroy .urban-product-image{height:245px;}body.enterprise-public.theme-market-stroy .urban-product-card{border-radius:9px;}
+@media(max-width:900px){body.enterprise-public.theme-market-stroy .urban-header{grid-template-columns:minmax(0,1fr);grid-template-areas:"brand" "search" "account";gap:14px;}body.enterprise-public.theme-market-stroy .urban-menu{overflow-x:auto;justify-content:flex-start;}body.enterprise-public.theme-market-stroy .urban-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}body.enterprise-public.theme-market-stroy .urban-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:600px){body.enterprise-public.theme-market-stroy .urban-layout{width:calc(100% - 24px)!important;}body.enterprise-public.theme-market-stroy .urban-product-grid,body.enterprise-public.theme-market-stroy .urban-category-grid{grid-template-columns:minmax(0,1fr);}body.enterprise-public.theme-market-stroy .urban-header{padding:18px 14px;}body.enterprise-public.theme-market-stroy .urban-hero{padding:28px 20px;min-height:320px;}body.enterprise-public.theme-market-stroy .urban-hero h1{font-size:clamp(28px,7vw,40px);}body.enterprise-public.theme-market-stroy .urban-footer-grid{grid-template-columns:1fr;}}
