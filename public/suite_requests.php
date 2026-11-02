@@ -16,7 +16,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
   $allowed=['accepted','rejected','completed'];if(!in_array($state,$allowed,true)) {http_response_code(400);exit('Estado inválido');}
   $q=db()->prepare('SELECT state FROM suite_requests WHERE id=? AND seller_id=?');$q->execute([$id,$uid]);$old=$q->fetchColumn();
   if(!$old||!in_array($old,['requested','accepted'],true)||($state==='completed'&&$old!=='accepted')){http_response_code(403);exit('Transición inválida');}
-  db()->prepare('UPDATE suite_requests SET state=?,updated_at=NOW() WHERE id=? AND seller_id=? AND state=?')->execute([$state,$id,$uid,$old]);
+  $stmt=db()->prepare('UPDATE suite_requests SET state=?,updated_at=NOW() WHERE id=? AND seller_id=? AND state=?');
+  $stmt->execute([$state,$id,$uid,$old]);
+  if($stmt->rowCount()!==1){flash('error','La solicitud cambió de estado. Recarga la página.');redirect('suite_requests.php');}
   flash('success','Solicitud actualizada.');redirect('suite_requests.php');
  }
  if($action==='cancel'){
