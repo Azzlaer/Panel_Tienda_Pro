@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/../app/bootstrap.php';require_login();
 require_once __DIR__.'/../app/commerce_suite.php';
+require_once __DIR__.'/../app/core_migrations.php';
 $uid=(int)user()['id'];
 if($_SERVER['REQUEST_METHOD']==='POST'){
  verify_csrf();$id=(int)($_POST['id']??0);$p=suite_owned_product($id,$uid);
@@ -10,7 +11,22 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
  $rawPrice=trim((string)($_POST['price']??''));
  $price=$rawPrice===''?false:filter_var($rawPrice,FILTER_VALIDATE_INT,['options'=>['min_range'=>0,'max_range'=>999999999999]]);
  if($stock===false||$price===false){flash('error','Precio o stock inválido.');redirect('inventory.php');}
- db()->prepare('UPDATE products SET stock=?,price_clp=?,updated_at=NOW() WHERE id=? AND user_id=?')->execute([$stock,$price,$id,$uid]);
+ $pdo=db();
+ try {
+  $pdo->beginTransaction();
+  $locked=$pdo->prepare('SELECT stock,price_clp FROM products WHERE id=? AND user_id=? FOR UPDATE');
+  $locked->execute([$id,$uid]);$before=$locked->fetch(PDO::FETCH_ASSOC);
+  if(!$before)throw new RuntimeException('Producto no disponible.');
+  $pdo->prepare('UPDATE products SET stock=?,price_clp=?,updated_at=NOW() WHERE id=? AND user_id=?')->execute([$stock,$price,$id,$uid]);
+  if(core_inventory_audit_ready($pdo)){
+   $pdo->prepare('INSERT INTO core_inventory_audit(seller_id,product_id,action_name,previous_stock,new_stock,previous_price_clp,new_price_clp) VALUES(?,?,?,?,?,?,?)')
+   ->execute([$uid,$id,'manual_adjust',$before['stock'],$stock,$before['price_clp'],$price]);
+  }
+  $pdo->commit();
+ } catch(Throwable $e) {
+  if($pdo->inTransaction())$pdo->rollBack();
+  flash('error','No se pudo actualizar inventario: '.$e->getMessage());redirect('inventory.php');
+ }
  flash('success','Inventario actualizado.');redirect('inventory.php');
 }
 $q=db()->prepare('SELECT id,title,stock,price_clp,status FROM products WHERE user_id=? ORDER BY created_at DESC LIMIT 300');$q->execute([$uid]);$items=$q->fetchAll();
