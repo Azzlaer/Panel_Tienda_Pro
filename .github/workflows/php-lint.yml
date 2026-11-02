@@ -27,3 +27,6 @@ jobs:
           while IFS= read -r -d '' file; do
             php -l "$file"
           done < <(find . -type f -name '*.php' -not -path './vendor/*' -print0)
+
+      - name: Commerce QR and Kiosk smoke checks
+        run: php tests/commerce_qr_kiosk_smoke.php
