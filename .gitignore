@@ -1,0 +1,19 @@
+# Per-installation private configuration
+/config/config.php
+/.env
+/.env.*
+!/.env.example
+/storage/installed.lock
+/storage/*.log
+/storage/backups/
+/public/uploads/*
+!/public/uploads/.htaccess
+!/public/uploads/.gitkeep
+# Runtime and development files
+/vendor/
+/node_modules/
+/.phpunit.cache/
+/.idea/
+/.vscode/
+*.bak
+*.tmp
