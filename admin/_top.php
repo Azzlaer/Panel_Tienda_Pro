@@ -1,4 +1,0 @@
-<?php require_once dirname(__DIR__).'/config/bootstrap.php';require_admin();?>
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin · MiTienda</title><link rel="stylesheet" href="<?=BASE_URL?>css/estilos.css"></head><body>
-<div class="admin-layout"><div class="admin-title"><h1>🛡️ Administración</h1><a class="btn primary" href="<?=BASE_URL?>index.php">← Volver al sitio</a></div><nav class="admin-menu"><a href="<?=BASE_URL?>admin/index.php">📊 Dashboard</a><a href="<?=BASE_URL?>admin/usuarios.php">👥 Usuarios</a><a href="<?=BASE_URL?>admin/publicaciones.php">📦 Publicaciones</a><a href="<?=BASE_URL?>admin/configuracion.php">🎨 Templates</a></nav>
-<?php $flash=take_flash();if($flash):?><div class="panel"><?=e($flash)?></div><?php endif;?>

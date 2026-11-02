@@ -1,6 +1,0 @@
-<?php
-require __DIR__.'/config/bootstrap.php';if(!logged())redirect('index.php');
-$uid=(int)$_SESSION['id_usuario'];
-if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$id=(int)($_POST['id']??0);$s=$conexion->prepare('DELETE FROM favoritos WHERE id_usuario=? AND id_publicacion=?');$s->bind_param('ii',$uid,$id);$s->execute();redirect('favoritos.php');}
-$s=$conexion->prepare("SELECT p.id,p.titulo,p.precio FROM favoritos f JOIN publicaciones p ON p.id=f.id_publicacion WHERE f.id_usuario=? AND p.estado='activo' ORDER BY p.id DESC");$s->bind_param('i',$uid);$s->execute();$rows=$s->get_result()->fetch_all(MYSQLI_ASSOC);
-require __DIR__.'/_page_top.php';?><div class="panel"><h1>❤️ Mis favoritos</h1><?php foreach($rows as $p):?><div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding:10px"><a href="<?=BASE_URL?>ver.php?id=<?=$p['id']?>"><?=e($p['titulo'])?></a><form method="post"><input type="hidden" name="csrf" value="<?=e(csrf())?>"><input type="hidden" name="id" value="<?=$p['id']?>"><button class="small-btn danger">Quitar</button></form></div><?php endforeach;?><?php if(!$rows):?><p>Aún no tienes favoritos.</p><?php endif;?></div><?php require __DIR__.'/_page_bottom.php';?>
