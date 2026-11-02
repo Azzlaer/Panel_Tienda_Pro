@@ -15,6 +15,7 @@ $navGroups = [
     'Principal' => [
         'dashboard' => ['🏠', 'Resumen', 'index.php'],
         'suite' => ['🧩', 'Commerce Suite', 'commerce_suite.php'],
+        'pos' => ['🧾', 'Punto de Venta', 'pos.php'],
         'system' => ['🪟', 'Modo vitrina', 'system.php'],
     ],
     'Contenido' => [
