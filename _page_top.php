@@ -1,0 +1,1 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MiTienda</title><link rel="stylesheet" href="<?=BASE_URL?>css/estilos.css"></head><body><?php require BASE_PATH.'/header.php';?><main class="container"><?php $flash=take_flash();if($flash):?><div class="panel"><?=e($flash)?></div><?php endif;?>

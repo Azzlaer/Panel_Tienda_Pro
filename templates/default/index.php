@@ -1,0 +1,1 @@
+<?php require BASE_PATH.'/templates/modern/index.php'; ?>

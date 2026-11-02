@@ -1,0 +1,5 @@
+<?php
+require __DIR__.'/config/bootstrap.php';if(!logged())redirect('index.php');$uid=(int)$_SESSION['id_usuario'];
+if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$s=$conexion->prepare('UPDATE mensajes SET leido=1 WHERE id_receptor=?');$s->bind_param('i',$uid);$s->execute();redirect('inbox.php');}
+$s=$conexion->prepare('SELECT m.contenido,m.fecha,m.leido,u.nombre emisor FROM mensajes m JOIN usuarios u ON u.id=m.id_emisor WHERE m.id_receptor=? ORDER BY m.id DESC LIMIT 100');$s->bind_param('i',$uid);$s->execute();$rows=$s->get_result()->fetch_all(MYSQLI_ASSOC);
+require __DIR__.'/_page_top.php';?><div class="panel"><h1>📥 Bandeja de entrada</h1><form method="post"><input type="hidden" name="csrf" value="<?=e(csrf())?>"><button class="btn ghost">Marcar todos como leídos</button></form><?php foreach($rows as $m):?><div class="panel" style="background:#f8faff"><strong><?=e($m['emisor'])?></strong> · <small><?=e($m['fecha'])?></small> <?=$m['leido']?'':'<span class="pill">Nuevo</span>'?><p><?=nl2br(e($m['contenido']))?></p></div><?php endforeach;?><?php if(!$rows):?><p>No tienes mensajes.</p><?php endif;?></div><?php require __DIR__.'/_page_bottom.php';?>
