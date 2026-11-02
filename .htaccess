@@ -4,6 +4,6 @@ DirectoryIndex index.php
 RewriteEngine On
 RewriteRule ^(?:config|app|database|storage|partials)(?:/|$) - [F,L,NC]
 </IfModule>
-<FilesMatch "^(?:\.env|composer\.(?:json|lock)|README\.md|.*\.sql|.*\.log|installed\.lock)$">
+<FilesMatch "^(?:\.env(?:\..*)?|composer\.(?:json|lock)|README(?:_[^/]*)?\.md|.*\.(?:sql|log|bak|backup|ini|dist)|installed\.lock)$">
 Require all denied
 </FilesMatch>
