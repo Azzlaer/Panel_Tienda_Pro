@@ -6,7 +6,9 @@ if ($installer === false) { fwrite(STDERR, "Cannot read installer\n"); exit(1); 
 $checks = [
     'no database deletion' => !preg_match('/\\bDROP\\s+DATABASE\\b/i', $installer),
     'no destructive installer checkbox' => !str_contains($installer, 'name="reset_database"'),
-    'reject nonempty database' => str_contains($installer, 'if ($existingTables>0)'),
+    'reject nonempty database by default' => str_contains($installer, 'if ($existingTables>0 && !$freshStart)'),
+    'explicit confirmation' => str_contains($installer, "REINICIAR '.\$dbName"),
+    'restrict reset to selected schema' => str_contains($installer, 'information_schema.tables WHERE TABLE_SCHEMA'),
     'lock creation is checked' => str_contains($installer, 'file_put_contents($lockFile') && str_contains($installer, '===false) throw new RuntimeException'),
     'CSRF validation' => str_contains($installer, 'hash_equals('),
     'password minimum length' => str_contains($installer, 'strlen($adminPass)<12'),
