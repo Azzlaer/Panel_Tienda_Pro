@@ -7,7 +7,7 @@ function security_assert(bool $condition,string $message): void {
 }
 security_assert(security_registration_role()==='user','public registration is never admin');
 security_assert(security_registration_status()==='pending','all public users require approval');
-security_assert(!security_registration_valid_password('shortpassword'),'short passwords rejected');
+security_assert(!security_registration_valid_password('shortpass'),'short passwords rejected');
 security_assert(security_registration_valid_password(str_repeat('a',12)),'12-character password accepted');
 security_assert(!security_registration_valid_password(str_repeat('a',1025)),'oversized password rejected');
 security_assert(security_registration_valid_email('test@example.com'),'valid email accepted');
