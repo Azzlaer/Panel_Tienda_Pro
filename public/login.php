@@ -1,9 +1,11 @@
 <?php
 require_once __DIR__.'/../app/bootstrap.php';
+require_once __DIR__.'/../app/hcaptcha.php';
 if(user()) redirect('index.php');
 if($_SERVER['REQUEST_METHOD']==='POST'){
     verify_csrf();
     $identity=trim($_POST['login']??'');
+    if(!hcaptcha_verify_request('login')){flash('error','Completa la verificación hCaptcha e inténtalo nuevamente.');redirect('login.php');}
     if(login_is_limited($identity)){flash('error','Demasiados intentos. Intenta nuevamente en 15 minutos.');redirect('login.php');}
     $q=db()->prepare('SELECT * FROM users WHERE email=? OR username=? LIMIT 1');
     $q->execute([$identity,$identity]); $u=$q->fetch();
@@ -30,6 +32,7 @@ require __DIR__.'/../partials/header.php';
       <form method="post" class="login-pro-form"><?=csrf_field()?>
         <label><span>Usuario o correo electrónico</span><div class="login-field"><i>👤</i><input name="login" required autocomplete="username" autofocus placeholder="usuario@correo.cl"></div></label>
         <label><span>Contraseña</span><div class="login-field"><i>🔒</i><input id="loginPassword" type="password" name="password" required autocomplete="current-password" placeholder="Tu contraseña"><button type="button" class="password-toggle" onclick="const p=document.getElementById('loginPassword');p.type=p.type==='password'?'text':'password';this.textContent=p.type==='password'?'Ver':'Ocultar'">Ver</button></div></label>
+        <?=hcaptcha_widget('login')?>
         <button class="btn login-submit">Ingresar a mi cuenta <span>→</span></button>
       </form>
       <div class="login-register"><span>¿Quieres publicar tus productos?</span><a href="<?=url('register.php')?>">Crear cuenta de vendedor</a></div>
@@ -37,4 +40,5 @@ require __DIR__.'/../partials/header.php';
     </div>
   </div>
 </section>
+<?=hcaptcha_script('login')?>
 <?php require __DIR__.'/../partials/footer.php';?>
