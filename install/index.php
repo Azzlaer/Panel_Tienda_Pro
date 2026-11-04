@@ -62,6 +62,9 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     $cookieSecure=isset($_POST['cookie_secure']);
     $mailFrom=q('mail_from'); $mailName=q('mail_name',$siteName); $mailHost=q('mail_host'); $mailPort=q('mail_port','587');
     $mailUser=q('mail_user'); $mailPass=(string)($_POST['mail_pass'] ?? ''); $mailEncryption=q('mail_encryption','tls');
+    $hcaptchaEnabled=isset($_POST['hcaptcha_enabled']);
+    $hcaptchaSitekey=q('hcaptcha_sitekey');
+    $hcaptchaSecret=(string)($_POST['hcaptcha_secret']??'');
     $adminName=q('admin_name'); $adminUser=q('admin_user'); $adminEmail=q('admin_email'); $adminPass=(string)($_POST['admin_pass'] ?? '');
     $resetDatabase=isset($_POST['reset_database']); $installDemo=isset($_POST['install_demo']);
 
@@ -71,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     if (!filter_var($adminEmail,FILTER_VALIDATE_EMAIL)) $errors[]='El correo del administrador no es válido.';
     if (strlen($adminPass)<10) $errors[]='La contraseña del administrador debe tener al menos 10 caracteres.';
     if ($mailFrom!=='' && !filter_var($mailFrom,FILTER_VALIDATE_EMAIL)) $errors[]='El correo remitente no es válido.';
+    if($hcaptchaEnabled && !extension_loaded('curl')) $errors[]='hCaptcha requiere PHP cURL.';
+    if($hcaptchaEnabled && ($hcaptchaSitekey==='' || trim($hcaptchaSecret)==='')) $errors[]='hCaptcha requiere Sitekey y Secret.';
     if (!preg_match('/^[A-Za-z0-9_]+$/',$dbName)) $errors[]='El nombre de base de datos sólo puede contener letras, números y guion bajo.';
     if (!ctype_digit($dbPort) || (int)$dbPort<1 || (int)$dbPort>65535) $errors[]='Puerto MySQL inválido.';
 
@@ -123,6 +128,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
                 'COOKIE_SECURE'=>$cookieSecure,
                 'MAIL_FROM'=>$mailFrom,'MAIL_FROM_NAME'=>$mailName,'MAIL_HOST'=>$mailHost,'MAIL_PORT'=>$mailPort,
                 'MAIL_USER'=>$mailUser,'MAIL_PASS'=>$mailPass,'MAIL_ENCRYPTION'=>$mailEncryption,
+                'HCAPTCHA_ENABLED'=>$hcaptchaEnabled,'HCAPTCHA_SITEKEY'=>$hcaptchaSitekey,'HCAPTCHA_SECRET'=>$hcaptchaSecret,
+                'HCAPTCHA_LOGIN_ENABLED'=>true,'HCAPTCHA_REGISTER_ENABLED'=>true,
             ];
             foreach($pairs as $key=>$value){$config.='const '.$key.' = '.var_export($value,true).";\n";}
             $config.="const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;\n";
@@ -153,5 +160,6 @@ function val(string $key, array $defaults): string { return h($_POST[$key] ?? $d
 <label class="check full"><input type="checkbox" name="install_demo"> <span><b>Instalar 10 vendedores y 10 publicaciones demo</b><small>Incluye imágenes locales para probar catálogo, perfiles y visor.</small></span></label></div></div>
 <div class="card"><h2>4. Cookies y sesiones</h2><div class="grid"><label>Nombre de cookie<input name="cookie_name" value="<?=val('cookie_name',$defaults)?>"></label><label>Dominio de cookie<input name="cookie_domain" value="<?=val('cookie_domain',$defaults)?>" placeholder="Vacío en localhost"></label><label>Ruta<input name="cookie_path" value="<?=val('cookie_path',$defaults)?>"></label><label>SameSite<select name="cookie_samesite"><?php foreach(['Lax','Strict','None'] as $s):?><option <?=$s===($_POST['cookie_samesite']??'Lax')?'selected':''?>><?=$s?></option><?php endforeach;?></select></label><label class="check full"><input type="checkbox" name="cookie_secure" <?=isset($_POST['cookie_secure'])?'checked':''?>> Usar cookie Secure (actívalo sólo con HTTPS)</label></div></div>
 <div class="card"><h2>5. Correo del sitio (opcional)</h2><div class="grid"><label>Correo remitente<input type="email" name="mail_from" value="<?=val('mail_from',$defaults)?>"></label><label>Nombre remitente<input name="mail_name" value="<?=val('mail_name',$defaults)?>"></label><label>Servidor SMTP<input name="mail_host" value="<?=val('mail_host',$defaults)?>" placeholder="smtp.ejemplo.com"></label><label>Puerto SMTP<input name="mail_port" value="<?=val('mail_port',$defaults)?>"></label><label>Usuario SMTP<input name="mail_user" value="<?=val('mail_user',$defaults)?>"></label><label>Contraseña SMTP<input type="password" name="mail_pass"></label><label>Cifrado<select name="mail_encryption"><option value="tls">TLS</option><option value="ssl">SSL</option><option value="">Sin cifrado</option></select></label></div></div>
+<div class="card"><h2>Protección hCaptcha</h2><div class="grid"><label class="check full"><input type="checkbox" name="hcaptcha_enabled" <?=isset($_POST['hcaptcha_enabled'])?'checked':''?>> Activar hCaptcha para inicio de sesión y registro</label><label>Sitekey pública<input name="hcaptcha_sitekey" autocomplete="off" value="<?=val('hcaptcha_sitekey',$defaults)?>"></label><label>Secret privada<input type="password" name="hcaptcha_secret" autocomplete="off"><small>La clave privada se almacena en config/config.php, nunca se muestra al visitante. Requiere PHP cURL y conexión HTTPS a api.hcaptcha.com.</small></label></div></div>
 <div class="card"><h2>6. Administrador principal</h2><div class="grid"><label>Nombre visible<input name="admin_name" required value="<?=val('admin_name',$defaults)?>"></label><label>Usuario<input name="admin_user" required pattern="[A-Za-z0-9_]{3,40}" value="<?=val('admin_user',$defaults)?>"></label><label>Correo<input type="email" name="admin_email" required value="<?=val('admin_email',$defaults)?>"></label><label>Contraseña<input type="password" name="admin_pass" minlength="10" required><small>Mínimo 10 caracteres.</small></label></div></div>
 <div class="card"><button class="btn" <?=$requirementsOk?'':'disabled'?>>Verificar, instalar y crear administrador</button></div></form><?php endif;?></div></body></html>
