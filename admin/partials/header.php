@@ -41,6 +41,7 @@ $navGroups = [
     'Sistema' => [
         'chile' => ['🇨🇱', 'Configuración Chile', 'chile.php'],
         'health' => ['🛡️', 'Salud del sistema', 'health.php'],
+        'security_center' => ['🔐', 'Security Center PRO', 'security_center.php'],
         'updates' => ['⬆️', 'Actualizaciones', 'updates.php'],
         'audit' => ['📜', 'Auditoría', 'audit.php'],
         'backups' => ['💾', 'Copias de seguridad', 'backups.php'],
