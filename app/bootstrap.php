@@ -8,6 +8,15 @@ if (!is_file($root . '/config/config.php') || !is_file($root . '/storage/install
     header('Location: ' . $prefix . '/install/');
     exit;
 }
+// Set safe defaults before config.php starts the session; allow XAMPP HTTP locally.
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_only_cookies', '1');
+    ini_set('session.cookie_httponly', '1');
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+        ini_set('session.cookie_secure', '1');
+    }
+}
 require_once $root . '/config/config.php';
 
 header('X-Content-Type-Options: nosniff');
