@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../app/bootstrap.php';
+require_once __DIR__.'/../app/bootstrap.php';header('Cache-Control: no-store, private');
 if(user()) redirect('index.php');
 if($_SERVER['REQUEST_METHOD']==='POST'){
     verify_csrf();
