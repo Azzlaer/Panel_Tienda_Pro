@@ -6,18 +6,21 @@ require_once __DIR__.'/../app/commerce_suite.php';
 require_once __DIR__.'/../app/pos.php';
 require_once __DIR__.'/../app/orders_pro.php';
 require_once __DIR__.'/../app/core_migrations.php';
+require_once __DIR__.'/../app/merchant_center.php';
 
 $modules = [
  'suite'=>['Commerce Suite','suite_ready','suite_install'],
  'pos'=>['Punto de Venta PRO','pos_ready','pos_install'],
  'orders'=>['Pedidos PRO','orders_pro_ready','orders_pro_install'],
- 'core'=>['Auditoría Enterprise Core','core_inventory_audit_ready','core_inventory_install']
+ 'core'=>['Auditoría Enterprise Core','core_inventory_audit_ready','core_inventory_install'],
+ 'merchant'=>['Merchant Center PRO','merchant_ready','merchant_install']
 ];
 function integration_module_ready(string $module): bool {
  if($module==='suite') return suite_ready();
  if($module==='pos') return pos_ready(db());
  if($module==='orders') return orders_pro_ready(db());
  if($module==='core') return core_inventory_audit_ready(db());
+ if($module==='merchant') return merchant_ready(db());
  return false;
 }
 if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -30,6 +33,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
    elseif($module==='pos')pos_install(db());
    elseif($module==='orders')orders_pro_install(db());
    elseif($module==='core')core_inventory_install(db());
+   elseif($module==='merchant')merchant_install(db());
    if(!integration_module_ready($module))throw new RuntimeException('Las tablas no se crearon correctamente.');
    audit_log('integration.module_activated','module',$module);
    flash('success','Módulo activado correctamente.');
@@ -60,6 +64,6 @@ require __DIR__.'/partials/header.php';
  </div>
  <?php endforeach;?>
  </div>
- <p><strong>Orden recomendado:</strong> Commerce Suite → POS → Pedidos → Auditoría Enterprise Core. El panel controla la existencia de las tablas, no garantiza sus columnas ni una migración completada en caso de interrupciones.</p>
+ <p><strong>Orden recomendado:</strong> Commerce Suite → POS → Pedidos → Auditoría Enterprise Core → Merchant Center. El panel controla la existencia de las tablas, no garantiza sus columnas ni una migración completada en caso de interrupciones.</p>
 </section>
 <?php require __DIR__.'/partials/footer.php';

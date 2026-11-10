@@ -15,6 +15,7 @@ $navGroups = [
     'Principal' => [
         'dashboard' => ['🏠', 'Resumen', 'index.php'],
         'suite' => ['🧩', 'Commerce Suite', 'commerce_suite.php'],
+        'merchant_center' => ['🏪', 'Merchant Center PRO', 'merchant_center.php'],
         'integration' => ['🔗', 'Integration Center', 'integration_center.php'],
         'pos' => ['🧾', 'Punto de Venta PRO', 'pos.php'],
         'orders_pro' => ['📦', 'Pedidos PRO', 'orders_pro.php'],
