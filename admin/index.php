@@ -30,6 +30,10 @@ $topCats=db()->query("SELECT c.name,COUNT(*) total FROM products pr JOIN categor
 $maxCat=max(1,...array_map(fn($x)=>(int)$x['total'],$topCats?:[['total'=>1]]));
 require __DIR__.'/partials/header.php';
 ?>
+<section class="nexus-command" aria-label="Centro de operaciones Nexus">
+  <div><small>ADMINCP NEXUS 2.0</small><h2>Centro de operaciones</h2><p>Supervisa tus locales, publicaciones y herramientas administrativas.</p></div>
+  <div class="nexus-links"><a href="products.php">Moderar productos</a><a href="commerces.php">Directorio</a><a href="theme_studio.php">Theme Studio</a><a href="health.php">Diagnóstico</a></div>
+</section>
 <div class="admin-grid cols-4">
  <div class="metric-card"><div class="metric-icon">👥</div><div><strong><?=$stats['users']?></strong><small>Vendedores registrados</small><span class="dashboard-kpi-note"><?=$stats['pending_users']?> pendientes</span></div></div>
  <div class="metric-card info"><div class="metric-icon">📦</div><div><strong><?=$stats['published_products']?></strong><small>Artículos publicados</small><span class="dashboard-kpi-note"><?=$stats['pending_products']?> por moderar</span></div></div>
