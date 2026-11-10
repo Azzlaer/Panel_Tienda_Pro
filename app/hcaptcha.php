@@ -5,20 +5,22 @@ declare(strict_types=1);
  * hCaptcha login/registration protection. Secrets are read only from private configuration.
  * Activation is opt-in to preserve existing XAMPP installations.
  */
+require_once __DIR__.'/hcaptcha_settings.php';
 function hcaptcha_is_enabled(string $action): bool {
-    if (!defined('HCAPTCHA_ENABLED') || HCAPTCHA_ENABLED !== true) return false;
+    $settings=hcaptcha_settings();
+    if (!$settings['enabled']) return false;
     return match ($action) {
-        'login' => !defined('HCAPTCHA_LOGIN_ENABLED') || HCAPTCHA_LOGIN_ENABLED === true,
-        'register' => !defined('HCAPTCHA_REGISTER_ENABLED') || HCAPTCHA_REGISTER_ENABLED === true,
+        'login' => $settings['login'],
+        'register' => $settings['register'],
         default => false,
     };
 }
 function hcaptcha_sitekey(): string {
-    return defined('HCAPTCHA_SITEKEY') ? trim((string)HCAPTCHA_SITEKEY) : '';
+    return trim((string)hcaptcha_settings()['sitekey']);
 }
 function hcaptcha_verify_token(string $token, ?callable $transport = null): bool {
     $sitekey=hcaptcha_sitekey();
-    $secret=defined('HCAPTCHA_SECRET') ? trim((string)HCAPTCHA_SECRET) : '';
+    $secret=trim((string)hcaptcha_settings()['secret']);
     // Fail closed whenever protection is enabled but credentials are missing.
     if($token==='' || strlen($token)>8192 || $sitekey==='' || $secret==='') return false;
     $ip=(string)($_SERVER['REMOTE_ADDR']??'');
