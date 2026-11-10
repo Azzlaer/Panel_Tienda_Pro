@@ -52,6 +52,8 @@ jobs:
         run: php tests/marketplace_test.php
       - name: Merchant Center authorization smoke checks
         run: php tests/merchant_center_test.php
+      - name: Consolidated v7 integration regression
+        run: php tests/integration_pr12_pr14_smoke.php
       - name: Validate Page Builder JavaScript syntax
         run: node --check public/assets/js/content-page-builder.js
       - name: Marketplace JavaScript syntax
