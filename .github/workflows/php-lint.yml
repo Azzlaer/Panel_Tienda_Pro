@@ -48,6 +48,8 @@ jobs:
         run: php tests/integration_suite_smoke.php
       - name: Content Hub and Page Builder security checks
         run: php tests/content_hub_test.php
+      - name: Validate Page Builder JavaScript syntax
+        run: node --check public/assets/js/content-page-builder.js
 
   mariadb-integration:
     runs-on: ubuntu-latest
