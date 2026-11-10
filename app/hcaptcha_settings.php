@@ -43,18 +43,36 @@ function hcaptcha_settings_validate(array $settings): void {
     if($settings['enabled'] && ($settings['sitekey']===''||$settings['secret']===''))throw new InvalidArgumentException('Para activar hCaptcha debes configurar Sitekey y Secret.');
     if($settings['enabled'] && !function_exists('curl_init'))throw new RuntimeException('PHP cURL es necesario para verificar hCaptcha.');
 }
+/** Safe admin-facing errors; never interpolate credentials or absolute paths. */
+class HcaptchaSettingsStorageException extends RuntimeException {}
+function hcaptcha_settings_diagnostics(?string $path=null): array {
+    $path=$path??hcaptcha_settings_path();
+    $dir=dirname($path);
+    return [
+        'directory_exists'=>is_dir($dir),
+        'directory_writable'=>is_dir($dir)&&is_writable($dir),
+        'file_exists'=>is_file($path),
+        'file_writable'=>!file_exists($path)||is_writable($path),
+        'curl'=>function_exists('curl_init'),
+        'open_basedir'=>(string)ini_get('open_basedir')!=='',
+    ];
+}
 function hcaptcha_settings_write(array $settings,?string $path=null): void {
     hcaptcha_settings_validate($settings);
     $path=$path??hcaptcha_settings_path();
     $dir=dirname($path);
-    if(!is_dir($dir)||!is_writable($dir)||is_link($path))throw new RuntimeException('No se puede guardar: revisa permisos de config/.');
+    if(!is_dir($dir))throw new HcaptchaSettingsStorageException('No existe la carpeta config/.');
+    if(!is_writable($dir))throw new HcaptchaSettingsStorageException('La carpeta config/ no tiene permisos de escritura para Apache.');
+    if(is_link($path))throw new HcaptchaSettingsStorageException('El archivo de configuración no puede ser un enlace simbólico.');
+    if(file_exists($path) && (!is_file($path)||!is_writable($path)))throw new HcaptchaSettingsStorageException('El archivo config/hcaptcha.local.php no tiene permisos de escritura.');
     $data="<?php\n// Generado desde Security Center PRO. No publicar ni versionar.\nreturn ".var_export($settings,true).";\n";
     $temp=tempnam($dir,'.hcaptcha-');
-    if($temp===false)throw new RuntimeException('No se pudo crear archivo temporal de configuración.');
+    if($temp===false)throw new HcaptchaSettingsStorageException('PHP no pudo crear un archivo temporal en config/. Revisa permisos y open_basedir.');
     try {
-        if(file_put_contents($temp,$data,LOCK_EX)!==strlen($data))throw new RuntimeException('No se pudo escribir configuración.');
+        if(file_put_contents($temp,$data,LOCK_EX)!==strlen($data))throw new HcaptchaSettingsStorageException('PHP no pudo escribir el archivo temporal en config/.');
         @chmod($temp,0600);
-        if(!rename($temp,$path))throw new RuntimeException('No se pudo reemplazar la configuración.');
+        if(!@rename($temp,$path))throw new HcaptchaSettingsStorageException('Windows/Apache no pudo reemplazar config/hcaptcha.local.php. Revisa permisos de modificación y eliminación del archivo para la cuenta del servicio Apache.');
+        if(function_exists('opcache_invalidate'))@opcache_invalidate($path,true);
     } finally {
         if(is_file($temp))@unlink($temp);
     }
