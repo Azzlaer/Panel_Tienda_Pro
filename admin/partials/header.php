@@ -23,6 +23,7 @@ $navGroups = [
     ],
     'Contenido' => [
         'products' => ['📦', 'Artículos', 'products.php'],
+        'marketplace' => ['🛍️', 'Marketplace Enterprise', 'marketplace.php'],
         'content' => ['💬', 'Comunidad', 'content.php'],
         'categories' => ['🗂️', 'Categorías', 'categories.php'],
         'news' => ['📰', 'Noticias', 'news.php'],
