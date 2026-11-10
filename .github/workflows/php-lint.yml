@@ -46,6 +46,8 @@ jobs:
         run: php tests/security_center_smoke.php
       - name: Integrated modules smoke checks
         run: php tests/integration_suite_smoke.php
+      - name: XAMPP CSS asset URL regression
+        run: php tests/public_asset_paths_test.php
       - name: Content Hub and Page Builder security checks
         run: php tests/content_hub_test.php
       - name: Marketplace Enterprise validation

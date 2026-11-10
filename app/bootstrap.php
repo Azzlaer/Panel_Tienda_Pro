@@ -36,6 +36,7 @@ function db(): PDO {
     ]);
     return $pdo;
 }
+require_once __DIR__.'/public_asset_paths.php';
 function e(?string $v): string { return htmlspecialchars($v ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 function url(string $path=''): string { return rtrim(APP_URL,'/') . '/' . ltrim($path,'/'); }
 function redirect(string $path): never { header('Location: ' . url($path)); exit; }
@@ -349,7 +350,7 @@ function active_template_slug(): string {
 function template_public_asset(string $slug, string $relative): string {
     $relative = ltrim(str_replace('\\','/',$relative),'/');
     if (str_contains($relative,'..')) return '';
-    return url('templates/'.$slug.'/'.$relative);
+    return public_asset_url('templates/'.$slug.'/'.$relative);
 }
 function active_template_styles(): array {
     $slug = active_template_slug(); $m = read_template_manifest($slug);

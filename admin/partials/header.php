@@ -72,8 +72,8 @@ function admin_nav_badge(string $key, int $pendingUsers, int $pendingProducts, i
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($adminTitle) ?> · <?= e(setting('site_name', APP_NAME)) ?></title>
-    <link rel="stylesheet" href="<?= url('assets/css/admin-pro.css') ?>"><link rel="stylesheet" href="<?= url('assets/css/enterprise-admin.css') ?>?v=2.0.0">
-<link rel="stylesheet" href="<?=url('assets/css/enterprise-v5.css')?>?v=5.0.0"><link rel="stylesheet" href="<?=url('assets/css/admin-nexus.css')?>?v=2.0">
+    <link rel="stylesheet" href="<?= public_asset_url('assets/css/admin-pro.css') ?>"><link rel="stylesheet" href="<?= public_asset_url('assets/css/enterprise-admin.css') ?>?v=2.0.0">
+<link rel="stylesheet" href="<?=public_asset_url('assets/css/enterprise-v5.css')?>?v=5.0.0"><link rel="stylesheet" href="<?=public_asset_url('assets/css/admin-nexus.css')?>?v=2.0">
 </head>
 <body class="admin-pro-body enterprise-admin nexus-admin">
 <div class="admin-shell">
