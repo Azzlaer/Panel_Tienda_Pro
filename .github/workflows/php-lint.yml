@@ -42,6 +42,8 @@ jobs:
         run: php tests/enterprise_core_smoke.php
       - name: hCaptcha auth regression tests
         run: php tests/hcaptcha_auth_test.php
+      - name: hCaptcha AdminCP configuration tests
+        run: php tests/hcaptcha_admin_settings_test.php
       - name: Security Center regression checks
         run: php tests/security_center_smoke.php
       - name: Integrated modules smoke checks

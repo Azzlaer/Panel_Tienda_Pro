@@ -2,12 +2,13 @@
 declare(strict_types=1);
 require_once __DIR__.'/../app/bootstrap.php';
 require_admin();
+require_once __DIR__.'/../app/hcaptcha.php';
 $adminPage='security_center';
 $adminTitle='Security Center PRO';
 $adminSubtitle='Diagnóstico preventivo de autenticación, permisos y entorno';
 $root=dirname(__DIR__);
 $https=(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off');
-$hcaptchaEnabled=defined('HCAPTCHA_ENABLED') && HCAPTCHA_ENABLED===true;
+$hcaptchaEnabled=hcaptcha_is_enabled('login') || hcaptcha_is_enabled('register');
 $checks=[
  ['Registro sin administrador público',is_file($root.'/app/security_auth.php'),'Todas las altas públicas reciben rol user y estado pending.'],
  ['Instalación bloqueada',is_file($root.'/storage/installed.lock') && is_file($root.'/config/config.php'),'El bloqueo y la configuración deben existir juntos.'],
@@ -32,5 +33,6 @@ require __DIR__.'/partials/header.php';
 <section class="panel-card"><div class="panel-head"><div><h2>🛡️ Security Center PRO</h2><p>Comprobaciones de configuración y autenticación. No sustituye una auditoría de penetración.</p></div></div>
 <div class="admin-grid cols-2"><div class="metric-card"><div><strong><?=$failedLogins?></strong><small>Intentos fallidos de acceso en 24 horas</small></div></div><div class="metric-card"><div><strong><?=$adminCount?></strong><small>Cuentas administradoras activas</small></div></div></div>
 <?php foreach($checks as [$label,$ok,$note]):?><div class="health-row" style="padding:13px 4px;border-bottom:1px solid #e4eaf3;display:flex;justify-content:space-between;gap:15px"><div><strong><?=e($label)?></strong><p style="margin:5px 0;color:#64748b"><?=e($note)?></p></div><span class="<?=$ok?'health-ok':'health-bad'?>"><?=$ok?'✓':'⚠'?></span></div><?php endforeach;?>
+<p><a class="admin-btn" href="hcaptcha_settings.php">⚙ Configurar hCaptcha de registro e inicio de sesión</a></p>
 <p>Nota: las comprobaciones de archivos indican que existe una configuración, pero no garantizan que Apache la aplique. Revisa permisos, registros de acceso, copias de seguridad y versiones PHP.</p></section>
 <?php require __DIR__.'/partials/footer.php';

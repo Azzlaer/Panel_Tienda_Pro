@@ -1,5 +1,6 @@
 # Per-installation private configuration
 /config/config.php
+/config/hcaptcha.local.php
 /.env
 /.env.*
 !/.env.example
