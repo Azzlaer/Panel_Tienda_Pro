@@ -20,13 +20,13 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
   if($action==='category'){
    $id=(int)($_POST['id']??0);$name=trim((string)($_POST['name']??''));$description=mb_substr(trim((string)($_POST['description']??'')),0,350);
    if(mb_strlen($name)<2||mb_strlen($name)>100)throw new InvalidArgumentException('Nombre de categoría inválido.');
-   $slug=hub_slug((string)($_POST['slug']??$name));
+   $slug=hub_slug(trim((string)($_POST['slug']??''))?:$name);
    if($id>0){$q=db()->prepare('UPDATE hub_categories SET name=?,slug=?,description=? WHERE id=?');$q->execute([$name,$slug,$description,$id]);}
    else {$q=db()->prepare('INSERT INTO hub_categories(name,slug,description) VALUES(?,?,?)');$q->execute([$name,$slug,$description]);}
    flash('success','Categoría guardada.');
   } elseif($action==='save_article'){
    $id=(int)($_POST['id']??0);$title=trim((string)($_POST['title']??''));$summary=mb_substr(trim((string)($_POST['summary']??'')),0,600);
-   $body=trim((string)($_POST['body']??''));$slug=hub_slug((string)($_POST['slug']?:$title));
+   $body=trim((string)($_POST['body']??''));$slug=hub_slug(trim((string)($_POST['slug']??''))?:$title);
    $status=hub_status((string)($_POST['status']??'draft'));
    $category=(int)($_POST['category_id']??0);$category=$category>0?$category:null;
    $tags=mb_substr(trim((string)($_POST['tags']??'')),0,400);
