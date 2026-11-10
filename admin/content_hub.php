@@ -24,6 +24,12 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
    if($id>0){$q=db()->prepare('UPDATE hub_categories SET name=?,slug=?,description=? WHERE id=?');$q->execute([$name,$slug,$description,$id]);}
    else {$q=db()->prepare('INSERT INTO hub_categories(name,slug,description) VALUES(?,?,?)');$q->execute([$name,$slug,$description]);}
    flash('success','Categoría guardada.');
+  } elseif($action==='delete_category'){
+   $id=(int)($_POST['id']??0);
+   if($id<1)throw new InvalidArgumentException('Categoría inválida.');
+   $q=db()->prepare('DELETE FROM hub_categories WHERE id=?');$q->execute([$id]);
+   audit_log('hub.category_delete','category',$id);
+   flash('success','Categoría eliminada. Sus artículos se conservan sin categoría.');
   } elseif($action==='save_article'){
    $id=(int)($_POST['id']??0);$title=trim((string)($_POST['title']??''));$summary=mb_substr(trim((string)($_POST['summary']??'')),0,600);
    $body=trim((string)($_POST['body']??''));$slug=hub_slug(trim((string)($_POST['slug']??''))?:$title);
@@ -92,7 +98,8 @@ require __DIR__.'/partials/header.php';
  </form>
 </section>
 <section class="hub-sidebar">
- <section class="panel-card"><h2>Categorías</h2><form class="admin-form hub-form" method="post"><?=csrf_field()?><input type="hidden" name="action" value="category"><label>Nombre<input name="name" required maxlength="100"></label><label>Slug<input name="slug" placeholder="Automático"></label><label>Descripción<input name="description" maxlength="350"></label><button class="admin-btn">Agregar categoría</button></form><ul><?php foreach($categories as $c):?><li><?=e($c['name'])?> <small>/<?=e($c['slug'])?></small></li><?php endforeach;?></ul></section>
+ <section class="panel-card"><h2>Categorías</h2><form class="admin-form hub-form" method="post"><?=csrf_field()?><input type="hidden" name="action" value="category"><label>Nombre<input name="name" required maxlength="100"></label><label>Slug<input name="slug" placeholder="Automático"></label><label>Descripción<input name="description" maxlength="350"></label><button class="admin-btn">Agregar categoría</button></form>
+<div class="hub-list" style="margin-top:17px"><?php foreach($categories as $c):?><div class="hub-admin-item"><form class="admin-form hub-form" method="post"><?=csrf_field()?><input type="hidden" name="action" value="category"><input type="hidden" name="id" value="<?=(int)$c['id']?>"><label>Nombre<input name="name" required maxlength="100" value="<?=e($c['name'])?>"></label><label>Slug<input name="slug" required maxlength="130" value="<?=e($c['slug'])?>"></label><label>Descripción<input name="description" maxlength="350" value="<?=e($c['description'])?>"></label><button class="admin-btn">Guardar categoría</button></form><form method="post" onsubmit="return confirm('¿Eliminar la categoría? Los artículos se conservarán sin categoría.')"><?=csrf_field()?><input type="hidden" name="action" value="delete_category"><button class="hub-delete" name="id" value="<?=(int)$c['id']?>">Eliminar categoría</button></form></div><?php endforeach;?></div></section>
  <section class="panel-card"><h2>Artículos recientes</h2><div class="hub-list"><?php foreach($articles as $a):?><div class="hub-admin-item"><strong><?=e($a['title'])?></strong><small><?=e($a['status'])?> · <?=e($a['category_name']??'Sin categoría')?> · <?=(int)$a['views']?> vistas</small><div><a href="content_hub.php?edit=<?=(int)$a['id']?>">Editar</a> · <a href="<?=url('content_article.php?slug='.rawurlencode($a['slug']))?>" target="_blank" rel="noopener">Ver</a><form method="post" onsubmit="return confirm('¿Eliminar este artículo?')"><?=csrf_field()?><input type="hidden" name="action" value="delete_article"><button class="hub-delete" name="id" value="<?=(int)$a['id']?>">Eliminar</button></form></div></div><?php endforeach;?></div></section>
  </section>
 </div>
