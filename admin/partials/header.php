@@ -15,6 +15,10 @@ $navGroups = [
     'Principal' => [
         'dashboard' => ['🏠', 'Resumen', 'index.php'],
         'suite' => ['🧩', 'Commerce Suite', 'commerce_suite.php'],
+        'integration' => ['🔗', 'Integration Center', 'integration_center.php'],
+        'pos' => ['🧾', 'Punto de Venta PRO', 'pos.php'],
+        'orders_pro' => ['📦', 'Pedidos PRO', 'orders_pro.php'],
+        'core_inventory' => ['🛡️', 'Enterprise Core', 'core_inventory.php'],
         'system' => ['🪟', 'Modo vitrina', 'system.php'],
     ],
     'Contenido' => [
@@ -41,6 +45,7 @@ $navGroups = [
     'Sistema' => [
         'chile' => ['🇨🇱', 'Configuración Chile', 'chile.php'],
         'health' => ['🛡️', 'Salud del sistema', 'health.php'],
+        'security_center' => ['🔐', 'Security Center PRO', 'security_center.php'],
         'updates' => ['⬆️', 'Actualizaciones', 'updates.php'],
         'audit' => ['📜', 'Auditoría', 'audit.php'],
         'backups' => ['💾', 'Copias de seguridad', 'backups.php'],
@@ -64,9 +69,9 @@ function admin_nav_badge(string $key, int $pendingUsers, int $pendingProducts, i
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($adminTitle) ?> · <?= e(setting('site_name', APP_NAME)) ?></title>
     <link rel="stylesheet" href="<?= url('assets/css/admin-pro.css') ?>"><link rel="stylesheet" href="<?= url('assets/css/enterprise-admin.css') ?>?v=2.0.0">
-<link rel="stylesheet" href="<?=url('assets/css/enterprise-v5.css')?>?v=5.0.0">
+<link rel="stylesheet" href="<?=url('assets/css/enterprise-v5.css')?>?v=5.0.0"><link rel="stylesheet" href="<?=url('assets/css/admin-nexus.css')?>?v=2.0">
 </head>
-<body class="admin-pro-body enterprise-admin">
+<body class="admin-pro-body enterprise-admin nexus-admin">
 <div class="admin-shell">
     <aside class="admin-sidebar" id="adminSidebar">
         <div class="admin-sidebar-head">
@@ -81,6 +86,7 @@ function admin_nav_badge(string $key, int $pendingUsers, int $pendingProducts, i
         </div>
 
         <nav class="admin-nav" aria-label="Menú administrativo">
+            <p id="nexusNoResults" class="nexus-no-results" hidden>No se encontraron módulos.</p>
             <?php foreach ($navGroups as $groupLabel => $items): ?>
                 <section class="admin-nav-group">
                     <button class="enterprise-group-toggle" type="button" aria-expanded="true"><span><?= e($groupLabel) ?></span><span aria-hidden="true">⌄</span></button>
@@ -113,6 +119,7 @@ function admin_nav_badge(string $key, int $pendingUsers, int $pendingProducts, i
                 <h1><?= e($adminTitle) ?></h1>
                 <p><?= e($adminSubtitle) ?></p>
             </div>
+            <div class="nexus-toolbar"><input id="nexusNavSearch" class="nexus-search" type="search" placeholder="Buscar módulo… (Ctrl+K)" aria-label="Buscar módulos de administración" autocomplete="off"></div>
             <div class="admin-user">
                 <span><?= e($me['display_name'] ?? $me['username']) ?></span>
                 <small>Administrador</small>
