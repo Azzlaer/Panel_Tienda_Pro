@@ -72,3 +72,25 @@ try{orders_pro_create($pdo,1,10,1,'own product');assert_db(false,'self-order den
 catch(RuntimeException){assert_db(true,'buyer cannot order own product');}
 assert_db((int)$pdo->query("SELECT COUNT(*) FROM pro_orders WHERE status='cancelled'")->fetchColumn()===1,'cancel status persisted');
 echo "MySQL/MariaDB integration complete\n";
+
+// Content Hub and Page Builder exercise the same MariaDB service.
+require_once __DIR__.'/../app/content_hub.php';
+hub_install($pdo);
+hub_install($pdo); // idempotent activation
+assert_db(hub_ready($pdo),'Content Hub migration installs idempotently');
+$pdo->prepare('INSERT INTO hub_categories(name,slug,description) VALUES(?,?,?)')->execute(['Guías','guias','Contenido comercial']);
+$category=(int)$pdo->lastInsertId();
+$insert=$pdo->prepare('INSERT INTO hub_articles(category_id,author_id,title,slug,summary,body,status,featured,published_at) VALUES(?,?,?,?,?,?,?,?,?)');
+$insert->execute([$category,1,'Publicación visible','publicacion-visible','Resumen','Contenido de prueba','published',1,date('Y-m-d H:i:s')]);
+$published=(int)$pdo->lastInsertId();
+$insert->execute([$category,1,'Borrador privado','borrador-privado','Resumen privado','No mostrar','draft',0,null]);
+$articleList=$pdo->query("SELECT id FROM hub_articles WHERE status='published' AND published_at<=NOW()")->fetchAll(PDO::FETCH_COLUMN);
+assert_db(count($articleList)===1 && (int)$articleList[0]===$published,'only published articles queryable');
+$pdo->prepare('UPDATE hub_articles SET status=? WHERE id=?')->execute(['hidden',$published]);
+assert_db((int)$pdo->query("SELECT COUNT(*) FROM hub_articles WHERE status='published'")->fetchColumn()===0,'hidden article excluded');
+$blocks=hub_normalize_blocks('[{"type":"heading","title":"Nuestra galería"},{"type":"text","body":"Bienvenidos"}]');
+$pdo->prepare('INSERT INTO hub_pages(author_id,title,slug,blocks_json,status,show_navigation,published_at) VALUES(?,?,?,?,?,?,?)')->execute([1,'Página publicada','sobre-nosotros',$blocks,'published',1,date('Y-m-d H:i:s')]);
+$pdo->prepare('INSERT INTO hub_pages(author_id,title,slug,blocks_json,status,show_navigation,published_at) VALUES(?,?,?,?,?,?,?)')->execute([1,'Página privada','privada','[]','draft',1,null]);
+assert_db((int)$pdo->query("SELECT COUNT(*) FROM hub_pages WHERE status='published' AND show_navigation=1 AND published_at<=NOW()")->fetchColumn()===1,'public navigation excludes draft pages');
+assert_db(str_contains(hub_render_blocks($blocks,'http://localhost/public'),'Nuestra galería'),'stored blocks render from DB');
+echo "Content Hub and Page Builder MariaDB checks complete\n";

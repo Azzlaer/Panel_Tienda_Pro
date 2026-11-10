@@ -46,6 +46,16 @@ jobs:
         run: php tests/security_center_smoke.php
       - name: Integrated modules smoke checks
         run: php tests/integration_suite_smoke.php
+      - name: Content Hub and Page Builder security checks
+        run: php tests/content_hub_test.php
+      - name: Marketplace Enterprise validation
+        run: php tests/marketplace_test.php
+      - name: Merchant Center authorization smoke checks
+        run: php tests/merchant_center_test.php
+      - name: Validate Page Builder JavaScript syntax
+        run: node --check public/assets/js/content-page-builder.js
+      - name: Marketplace JavaScript syntax
+        run: node --check public/assets/js/marketplace-enterprise.js
 
   mariadb-integration:
     runs-on: ubuntu-latest
@@ -76,3 +86,19 @@ jobs:
           TEST_DB_USER: root
           TEST_DB_PASS: root
         run: php tests/mariadb_integration.php
+      - name: Marketplace Enterprise MariaDB integration
+        env:
+          TEST_DB_DSN: mysql:host=127.0.0.1;port=3306;dbname=commerce_marketplace_test;charset=utf8mb4
+          TEST_DB_USER: root
+          TEST_DB_PASS: root
+        run: |
+          php -r '$pdo=new PDO("mysql:host=127.0.0.1;port=3306;charset=utf8mb4","root","root");$pdo->exec("CREATE DATABASE IF NOT EXISTS commerce_marketplace_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");'
+          php tests/marketplace_mariadb.php
+      - name: Merchant Center MariaDB authorization
+        env:
+          TEST_DB_DSN: mysql:host=127.0.0.1;port=3306;dbname=commerce_merchant_test;charset=utf8mb4
+          TEST_DB_USER: root
+          TEST_DB_PASS: root
+        run: |
+          php -r '$pdo=new PDO("mysql:host=127.0.0.1;port=3306;charset=utf8mb4","root","root");$pdo->exec("CREATE DATABASE IF NOT EXISTS commerce_merchant_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");'
+          php tests/merchant_center_mariadb.php
