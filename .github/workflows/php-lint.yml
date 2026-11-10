@@ -86,5 +86,5 @@ jobs:
           TEST_DB_USER: root
           TEST_DB_PASS: root
         run: |
-          php -r 'new PDO("mysql:host=127.0.0.1;port=3306;charset=utf8mb4","root","root")->exec("CREATE DATABASE IF NOT EXISTS commerce_marketplace_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci") ;'
+          php -r '$pdo=new PDO("mysql:host=127.0.0.1;port=3306;charset=utf8mb4","root","root");$pdo->exec("CREATE DATABASE IF NOT EXISTS commerce_marketplace_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");'
           php tests/marketplace_mariadb.php
