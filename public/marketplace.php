@@ -2,8 +2,10 @@
 declare(strict_types=1);
 require_once __DIR__.'/../app/bootstrap.php';
 require_once __DIR__.'/../app/marketplace.php';
+require_once __DIR__.'/../app/vip_product_effects.php';
 $pdo=db();$ready=marketplace_ready($pdo);
 $f=marketplace_filters($_GET);$page=max(1,(int)($_GET['page']??1));$result=marketplace_query($pdo,$f,$page);
+$vipEffects=vip_effect_map($pdo,array_column($result['items'],'id'));
 $categories=$pdo->query("SELECT id,name,parent_id FROM categories WHERE active=1 ORDER BY name ASC")->fetchAll();
 $sellers=$pdo->query("SELECT DISTINCT u.id,p.display_name FROM users u JOIN profiles p ON p.user_id=u.id JOIN products pr ON pr.user_id=u.id AND pr.status='published' WHERE u.status='active' ORDER BY p.display_name LIMIT 200")->fetchAll();
 $favoriteIds=[];
@@ -15,6 +17,7 @@ $pageTitle='Marketplace Enterprise';$pageDescription='Descubre productos y comer
 require __DIR__.'/../partials/header.php';
 ?>
 <link rel="stylesheet" href="<?=url('assets/css/marketplace-enterprise.css')?>">
+<link rel="stylesheet" href="<?=url('assets/css/vip-product-effects.css')?>">
 <section class="mkt">
 <header class="mkt-hero"><span>MARKETPLACE · COMERCIOSOCIAL</span><h1>Descubre negocios y oportunidades</h1><p>Encuentra productos, compara precios y guarda tus búsquedas. Contacta directamente con los vendedores.</p><div class="mkt-hero-links"><a href="<?=url('commerces.php')?>">Explorar comercios</a><?php if(user()):?><a href="<?=url('marketplace_saved.php')?>">Mis favoritos y búsquedas</a><?php endif;?></div></header>
 <div class="mkt-layout">
@@ -38,7 +41,7 @@ require __DIR__.'/../partials/header.php';
  <?php foreach($result['items'] as $item):?>
  <article class="mkt-card">
    <a class="mkt-card-image" href="<?=url('product.php?id='.(int)$item['id'])?>"><img loading="lazy" src="<?=url($item['cover_image']?:'assets/cover.svg')?>" alt="<?=e($item['title'])?>"></a>
-   <div class="mkt-card-body"><small><?=e($item['category_name'])?> · <?=e($item['merchant_name'])?></small><h3><a href="<?=url('product.php?id='.(int)$item['id'])?>"><?=e($item['title'])?></a></h3><div class="mkt-price"><?=money_clp((int)$item['price_clp'])?></div>
+   <div class="mkt-card-body"><small><?=e($item['category_name'])?> · <?=e($item['merchant_name'])?></small><h3><a href="<?=url('product.php?id='.(int)$item['id'])?>"><span class="<?=e(vip_effect_class($vipEffects[(int)$item['id']]??null))?>"><?=e($item['title'])?></span></a></h3><div class="mkt-price"><?=money_clp((int)$item['price_clp'])?></div>
    <p class="mkt-availability"><?=($item['stock']===null?'Consultar disponibilidad':((int)$item['stock']>0?'Stock: '.(int)$item['stock']:'Sin existencias'))?></p>
    <div class="mkt-card-actions"><a class="mkt-detail" href="<?=url('product.php?id='.(int)$item['id'])?>">Ver artículo</a><label><input class="mkt-compare-checkbox" type="checkbox" name="ids[]" value="<?=(int)$item['id']?>"> Comparar</label></div>
    <?php if(user()&&$ready):?><button class="mkt-fav-button" form="mkt-fav-<?=(int)$item['id']?>" type="submit"><?=isset($favoriteIds[(int)$item['id']])?'♥ Quitar de favoritos':'♡ Añadir a favoritos'?></button><?php endif;?>

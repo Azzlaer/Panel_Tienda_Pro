@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../app/bootstrap.php';
+require_once __DIR__.'/../app/vip_product_effects.php';
 ensure_news_schema();
 ensure_home_slides_schema();
 $homeSlides=db()->query('SELECT * FROM home_slides WHERE active=1 ORDER BY sort_order ASC,id DESC')->fetchAll();
@@ -19,6 +20,7 @@ $whereSql=' WHERE '.implode(' AND ',$where);
 $order=match($sort){'popular'=>'pr.views DESC,pr.featured DESC,pr.created_at DESC','price_asc'=>'pr.price_clp ASC,pr.created_at DESC','price_desc'=>'pr.price_clp DESC,pr.created_at DESC',default=>'pr.featured DESC,pr.created_at DESC'};
 $count=db()->prepare("SELECT COUNT(*) FROM products pr JOIN categories c ON c.id=pr.category_id JOIN users u ON u.id=pr.user_id JOIN profiles p ON p.user_id=u.id{$whereSql}");$count->execute($args);$totalProducts=(int)$count->fetchColumn();$pages=max(1,(int)ceil($totalProducts/$perPage));$page=min($page,$pages);$offset=($page-1)*$perPage;
 $sql="SELECT pr.*,c.name category_name,u.username,p.display_name,p.avatar,p.cover,p.business_local,p.business_number,p.business_address,p.location FROM products pr JOIN categories c ON c.id=pr.category_id JOIN users u ON u.id=pr.user_id JOIN profiles p ON p.user_id=u.id{$whereSql} ORDER BY {$order} LIMIT {$perPage} OFFSET {$offset}";$st=db()->prepare($sql);$st->execute($args);$products=$st->fetchAll();
+$vipEffects=vip_effect_map(db(),array_column($products,'id'));
 $cats=db()->query("SELECT c.*, (SELECT COUNT(*) FROM products pr WHERE pr.category_id=c.id AND pr.status='published') total, (SELECT pr.cover_image FROM products pr JOIN categories cc ON cc.id=pr.category_id WHERE pr.status='published' AND (cc.id=c.id OR cc.parent_id=c.id) ORDER BY pr.featured DESC,pr.created_at DESC LIMIT 1) cover_image FROM categories c WHERE c.active=1 AND c.parent_id IS NULL ORDER BY c.sort_order,c.name")->fetchAll();
 $featured=array_values(array_filter($products,fn($p)=>(int)$p['featured']===1));
 $newArrivals=array_slice($products,0,8);
@@ -33,6 +35,7 @@ $pageDescription=setting('seo_default_description',setting('site_tagline','Explo
 $pageCanonical=url('index.php');
 require __DIR__.'/../partials/header.php';
 ?>
+<link rel="stylesheet" href="<?=url('assets/css/vip-product-effects.css')?>">
 <?php if($homeSlides): ?>
 <section data-studio-section="hero" class="cs-slider" data-interval="<?=$sliderSeconds*1000?>" aria-roledescription="carrusel" aria-label="Promociones destacadas" tabindex="0">
  <div class="cs-slider-track">
@@ -77,7 +80,7 @@ require __DIR__.'/../partials/header.php';
 <div class="urban-results-summary"><b><?=number_format($totalProducts)?></b> publicaciones encontradas<?php if($q!==''):?> para <strong>“<?=e($q)?>”</strong><?php endif;?></div>
 </section>
 <section data-studio-section="catalog" class="urban-section"><div class="urban-section-title"><div><span>VITRINA COMERCIAL</span><h2><?=($q!==''||$cat>0||$minPrice>0||$maxPrice>0)?'Resultados de búsqueda':'Artículos y servicios recientes'?></h2></div><a href="<?=url('index.php')?>">Ver todo →</a></div>
-<div class="urban-product-grid"><?php foreach($products as $p):?><article class="urban-product-card"><a class="urban-product-image" href="product.php?id=<?=$p['id']?>"><img src="<?=url($p['cover_image'])?>" alt="<?=e($p['title'])?>"><?php if($p['featured']):?><b class="urban-sale">DESTACADO</b><?php endif;?></a><div class="urban-product-info"><small><?=e($p['category_name'])?></small><h3><a href="product.php?id=<?=$p['id']?>"><?=e($p['title'])?></a></h3><div class="urban-price"><?=money_clp($p['price_clp'])?></div><div class="urban-seller"><img src="<?=url($p['avatar']?:'assets/img-avatar.svg')?>"><span><a href="profile.php?u=<?=urlencode($p['username'])?>"><?=e($p['display_name'])?></a><?=stars_html(seller_stars((int)$p['user_id']))?></span></div></div></article><?php endforeach;?></div></section>
+<div class="urban-product-grid"><?php foreach($products as $p):?><article class="urban-product-card"><a class="urban-product-image" href="product.php?id=<?=$p['id']?>"><img src="<?=url($p['cover_image'])?>" alt="<?=e($p['title'])?>"><?php if($p['featured']):?><b class="urban-sale">DESTACADO</b><?php endif;?></a><div class="urban-product-info"><small><?=e($p['category_name'])?></small><h3><a href="product.php?id=<?=$p['id']?>"><span class="<?=e(vip_effect_class($vipEffects[(int)$p['id']]??null))?>"><?=e($p['title'])?></span></a></h3><div class="urban-price"><?=money_clp($p['price_clp'])?></div><div class="urban-seller"><img src="<?=url($p['avatar']?:'assets/img-avatar.svg')?>"><span><a href="profile.php?u=<?=urlencode($p['username'])?>"><?=e($p['display_name'])?></a><?=stars_html(seller_stars((int)$p['user_id']))?></span></div></div></article><?php endforeach;?></div></section>
 
 <?php if($pages>1):?><nav class="urban-pagination" aria-label="Paginación"><?php $base=$_GET;for($i=1;$i<=$pages;$i++):if($i>1&&$i<$page-2)continue;if($i<$pages&&$i>$page+2)continue;$base['page']=$i;?><a class="<?=$i===$page?'active':''?>" href="?<?=e(http_build_query($base))?>#catalogo"><?=$i?></a><?php endfor;?></nav><?php endif;?>
 

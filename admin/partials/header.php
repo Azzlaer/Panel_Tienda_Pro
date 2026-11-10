@@ -25,6 +25,7 @@ $navGroups = [
     'Contenido' => [
         'products' => ['📦', 'Artículos', 'products.php'],
         'marketplace' => ['🛍️', 'Marketplace Enterprise', 'marketplace.php'],
+        'vip_effects' => ['✨', 'Efectos VIP de artículos', 'vip_product_effects.php'],
         'content' => ['💬', 'Comunidad', 'content.php'],
         'categories' => ['🗂️', 'Categorías', 'categories.php'],
         'news' => ['📰', 'Noticias', 'news.php'],

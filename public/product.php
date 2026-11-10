@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../app/bootstrap.php';
+require_once __DIR__.'/../app/vip_product_effects.php';
 
 $id = (int)($_GET['id'] ?? 0);
 $q = db()->prepare(
@@ -51,10 +52,12 @@ $pageTitle=$p['title'];
 $pageDescription=mb_strimwidth(strip_tags((string)$p['description']),0,300,'…');
 $pageCanonical=url('product.php?id='.$p['id']);
 $pageImage=$p['cover_image'];
+$vipEffects=vip_effect_map(db(),[(int)$p['id']]);
 
 require __DIR__.'/../partials/header.php';
 ?>
 <link rel="stylesheet" href="<?=url('assets/css/product-viewer.css')?>">
+<link rel="stylesheet" href="<?=url('assets/css/vip-product-effects.css')?>">
 
 <div class="breadcrumbs">
     <a href="index.php">Inicio</a> › <?=e($p['category_name'])?> › <?=e($p['title'])?>
@@ -135,7 +138,7 @@ require __DIR__.'/../partials/header.php';
 
     <aside class="purchase-card">
         <span class="category-label"><?=e($p['category_name'])?></span>
-        <h1><?=e($p['title'])?></h1>
+        <h1><span class="<?=e(vip_effect_class($vipEffects[(int)$p['id']]??null))?>"><?=e($p['title'])?></span></h1>
         <div class="price huge">
             <small><?=e(setting('showcase_price_label', 'Valor publicado'))?></small><br>
             <?=money_clp($p['price_clp'])?> CLP
