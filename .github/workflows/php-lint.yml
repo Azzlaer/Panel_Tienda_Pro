@@ -58,6 +58,10 @@ jobs:
         run: php tests/marketplace_test.php
       - name: Merchant Center authorization smoke checks
         run: php tests/merchant_center_test.php
+      - name: VIP product NameEffects access and styling checks
+        run: php tests/vip_product_effects_test.php
+      - name: VIP effects JavaScript syntax
+        run: node --check public/assets/js/vip-product-effects.js
       - name: Consolidated v7 integration regression
         run: php tests/integration_pr12_pr14_smoke.php
       - name: Validate Page Builder JavaScript syntax
@@ -110,3 +114,11 @@ jobs:
         run: |
           php -r '$pdo=new PDO("mysql:host=127.0.0.1;port=3306;charset=utf8mb4","root","root");$pdo->exec("CREATE DATABASE IF NOT EXISTS commerce_merchant_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");'
           php tests/merchant_center_mariadb.php
+      - name: VIP Product NameEffects MariaDB integration
+        env:
+          TEST_DB_DSN: mysql:host=127.0.0.1;port=3306;dbname=commerce_vip_effects_test;charset=utf8mb4
+          TEST_DB_USER: root
+          TEST_DB_PASS: root
+        run: |
+          php -r '$pdo=new PDO("mysql:host=127.0.0.1;port=3306;charset=utf8mb4","root","root");$pdo->exec("CREATE DATABASE IF NOT EXISTS commerce_vip_effects_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");'
+          php tests/vip_product_effects_mariadb.php

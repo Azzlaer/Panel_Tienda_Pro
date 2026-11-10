@@ -9,6 +9,7 @@ require_once __DIR__.'/../app/core_migrations.php';
 require_once __DIR__.'/../app/content_hub.php';
 require_once __DIR__.'/../app/marketplace.php';
 require_once __DIR__.'/../app/merchant_center.php';
+require_once __DIR__.'/../app/vip_product_effects.php';
 
 $modules = [
  'suite'=>['Commerce Suite','suite_ready','suite_install'],
@@ -17,7 +18,8 @@ $modules = [
  'core'=>['Auditoría Enterprise Core','core_inventory_audit_ready','core_inventory_install'],
  'hub'=>['Content Hub + Page Builder','hub_ready','hub_install'],
  'marketplace'=>['Marketplace Enterprise','marketplace_ready','marketplace_install'],
- 'merchant'=>['Merchant Center PRO','merchant_ready','merchant_install']
+ 'merchant'=>['Merchant Center PRO','merchant_ready','merchant_install'],
+ 'vip_effects'=>['Efectos VIP de artículos','vip_effect_ready','vip_effect_install']
 ];
 function integration_module_ready(string $module): bool {
  if($module==='suite') return suite_ready();
@@ -27,6 +29,7 @@ function integration_module_ready(string $module): bool {
  if($module==='hub') return hub_ready(db());
  if($module==='marketplace') return marketplace_ready(db());
  if($module==='merchant') return merchant_ready(db());
+ if($module==='vip_effects') return vip_effect_ready(db());
  return false;
 }
 if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -42,6 +45,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
    elseif($module==='hub')hub_install(db());
    elseif($module==='marketplace')marketplace_install(db());
    elseif($module==='merchant')merchant_install(db());
+   elseif($module==='vip_effects')vip_effect_install(db());
    if(!integration_module_ready($module))throw new RuntimeException('Las tablas no se crearon correctamente.');
    audit_log('integration.module_activated','module',$module);
    flash('success','Módulo activado correctamente.');

@@ -1,0 +1,24 @@
+/* VIP Product NameEffects — preset-only, scoped to product title text. */
+.vip-fx{display:inline-block;position:relative;font-weight:800;max-width:100%;overflow-wrap:anywhere;text-decoration:none!important}
+.vip-fx-gold{color:#ba7804!important;text-shadow:0 0 7px #f6c34d9e,0 0 16px #ffe69b78}
+.vip-fx-neon{color:#176be4!important;text-shadow:0 0 7px #64bbffad,0 0 14px #72d6ff8a}
+.vip-fx-emerald{color:#048b70!important;text-shadow:0 0 7px #22cc9873,0 0 12px #55e8b080}
+.vip-fx-fire{color:#dc4b0c!important;text-shadow:0 0 5px #ffb347af,0 0 14px #ff772280}
+.vip-fx-rainbow{background:linear-gradient(110deg,#c52660,#af50d9,#1669de,#089b9c,#d0870b,#c52660);background-size:280% 100%;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:vip-spectrum 6s linear infinite}
+.vip-fx-pulse{color:#3158bd!important;animation:vip-pulse 2.8s ease-in-out infinite}
+@keyframes vip-spectrum{to{background-position:280% 0}}
+@keyframes vip-pulse{0%,100%{text-shadow:0 0 1px #5bb4e8}50%{text-shadow:0 0 9px #6cbfff,0 0 16px #60a5fa}}
+.vip-effect-chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;background:#eaf3ff;color:#1d5796;border:1px solid #bed7f4;font-size:12px;font-weight:750;vertical-align:middle}
+.vip-effect-panel{max-width:1250px;margin:20px auto;padding:20px;color:#193653}
+.vip-effect-hero{padding:30px;border-radius:18px;background:linear-gradient(120deg,#103260,#1e66ad);color:#fff}
+.vip-effect-hero h1{margin:8px 0}.vip-effect-hero p{color:#d8eafa}
+.vip-effect-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin:22px 0}
+.vip-effect-card{padding:20px;border:1px solid #d7e5f5;border-radius:15px;background:#fff;display:grid;gap:12px}
+.vip-effect-card label{font-weight:700;display:grid;gap:8px}
+.vip-effect-card select,.vip-effect-admin :is(select,input){padding:10px;border:1px solid #afc7e2;border-radius:9px;background:#fff;color:#16416e;width:100%}
+.vip-effect-card button,.vip-effect-admin button{padding:10px 15px;border:0;border-radius:9px;background:#1c60a9;color:#fff;font-weight:700;cursor:pointer}
+.vip-effect-card button:disabled{background:#a0b0c3;cursor:not-allowed}
+.vip-effect-preview{padding:16px;border:1px dashed #b9cfe9;background:#f5f9ff;border-radius:10px}
+.vip-effect-admin{display:grid;gap:13px;max-width:600px}.vip-effect-admin label{display:grid;gap:6px}
+.vip-effect-access{padding:15px;border-radius:12px;background:#f1f6ff;border:1px solid #cfe0f5;margin:17px 0}
+@media(prefers-reduced-motion:reduce){.vip-fx-rainbow,.vip-fx-pulse{animation:none!important}}
