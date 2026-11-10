@@ -67,7 +67,7 @@ require __DIR__.'/partials/header.php';
 <label class="hub-check"><input type="checkbox" name="show_navigation" <?=!empty($editing['show_navigation'])?'checked':''?>> Mostrar enlace en el menú público</label>
 <label>Orden de navegación<input type="number" name="sort_order" min="-1000" max="1000" value="<?=(int)($editing['sort_order']??0)?>"></label>
 <label>Título SEO<input name="seo_title" maxlength="190" value="<?=e($editing['seo_title']??'')?>"></label>
-<label>Descripción SEO<input name="seo_description" maxlength="300" value="<?=e($editing['seo_description']??'')?></label>
+<label>Descripción SEO<input name="seo_description" maxlength="300" value="<?=e($editing['seo_description']??'')?>"></label>
 <button class="admin-btn" type="submit">Guardar página</button>
 </form></section>
 <section class="hub-sidebar">
