@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
   if(!$ready)throw new RuntimeException('Activa el módulo en Integration Center.');
   $seller=filter_var($_POST['seller_id']??null,FILTER_VALIDATE_INT,['options'=>['min_range'=>1]]);
   if(!$seller)throw new InvalidArgumentException('Vendedor inválido.');
-  $enable=($_POST['action']??'')==='enable';$until=trim((string)($_POST['expires_at']??''))?:null;
+  $enable=($_POST['action']??'')==='enable';$until=$enable?(trim((string)($_POST['expires_at']??''))?:null):null;
   vip_grant($pdo,(int)user()['id'],(int)$seller,$enable,$until);
   audit_log('vip.seller_access_changed','user',(int)$seller,['enabled'=>$enable,'expires_at'=>$until]);
   flash('success','Permisos VIP actualizados.');
