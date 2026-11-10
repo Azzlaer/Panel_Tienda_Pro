@@ -11,9 +11,14 @@ $base=sys_get_temp_dir().'/commerce-hcaptcha-test-'.bin2hex(random_bytes(8));
 if(!mkdir($base,0700))throw new RuntimeException('Temp directory inaccessible');
 $path=$base.'/hcaptcha.local.php';
 try {
+ $diag=hcaptcha_settings_diagnostics($path);
+ settings_check($diag['directory_exists']&&$diag['directory_writable']&&!$diag['file_exists'],'new configuration directory diagnostics');
  $settings=['enabled'=>false,'login'=>true,'register'=>true,'sitekey'=>'public-test-key','secret'=>'private-test-secret'];
  hcaptcha_settings_write($settings,$path);
  settings_check(file_exists($path),'private file written');
+ $diag=hcaptcha_settings_diagnostics($path);
+ settings_check($diag['file_exists']&&$diag['file_writable'],'existing configuration writable');
+
  settings_check(hcaptcha_settings($path)===$settings,'settings reload correctly');
  $source=file_get_contents($path);
  settings_check(str_contains($source,'return array'),'settings are valid PHP array');
@@ -33,8 +38,17 @@ try {
  if(file_exists($path))unlink($path);
  rmdir($base);
 }
+
+try {
+ hcaptcha_settings_write(['enabled'=>false,'login'=>true,'register'=>true,'sitekey'=>'ok','secret'=>'ok'],sys_get_temp_dir().'/nonexistent-dir-'.bin2hex(random_bytes(5)).'/hcaptcha.local.php');
+ settings_check(false,'missing directory throws safe error');
+} catch(HcaptchaSettingsStorageException $e) {
+ settings_check(str_contains($e->getMessage(),'No existe la carpeta'),'missing directory detected without sensitive paths');
+}
+
 $ui=file_get_contents(dirname(__DIR__).'/admin/hcaptcha_settings.php');
 settings_check(str_contains($ui,'require_admin()')&&str_contains($ui,'verify_csrf()'),'admin authenticated and CSRF protected');
+settings_check(str_contains($ui,'hcaptcha_settings_diagnostics('),'admin displays safe server diagnostics');
 settings_check(!str_contains($ui,'value="<?=e($s[\'secret\'])?>'),'admin never prefills private secret');
 $ignore=file_get_contents(dirname(__DIR__).'/.gitignore');
 settings_check(str_contains($ignore,'/config/hcaptcha.local.php'),'secrets excluded from git');
