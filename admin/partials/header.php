@@ -91,16 +91,16 @@ function admin_nav_badge(string $key, int $pendingUsers, int $pendingProducts, i
 
         <nav class="admin-nav" aria-label="Menú administrativo">
             <p id="nexusNoResults" class="nexus-no-results" hidden>No se encontraron módulos.</p>
-            <?php foreach ($navGroups as $groupLabel => $items): ?>
+            <?php foreach ($navGroups as $__adminNavGroupLabel => $__adminNavItems): ?>
                 <section class="admin-nav-group">
-                    <button class="enterprise-group-toggle" type="button" aria-expanded="true"><span><?= e($groupLabel) ?></span><span aria-hidden="true">⌄</span></button>
+                    <button class="enterprise-group-toggle" type="button" aria-expanded="true"><span><?= e($__adminNavGroupLabel) ?></span><span aria-hidden="true">⌄</span></button>
                     <div class="enterprise-nav-items">
-                    <?php foreach ($items as $key => $item): ?>
-                        <?php $badge = admin_nav_badge($key, $pendingUsers, $pendingProducts, $unreadFeedback); ?>
-                        <a class="<?= $adminPage === $key ? 'active' : '' ?>" href="<?= e($item[2]) ?>" title="<?= e($item[1]) ?>">
-                            <span class="admin-nav-icon"><?= $item[0] ?></span>
-                            <b><?= e($item[1]) ?></b>
-                            <?php if ($badge > 0): ?><em><?= $badge ?></em><?php endif; ?>
+                    <?php foreach ($__adminNavItems as $__adminNavKey => $__adminNavItem): ?>
+                        <?php $__adminNavBadge = admin_nav_badge($__adminNavKey, $pendingUsers, $pendingProducts, $unreadFeedback); ?>
+                        <a class="<?= $adminPage === $__adminNavKey ? 'active' : '' ?>" href="<?= e($__adminNavItem[2]) ?>" title="<?= e($__adminNavItem[1]) ?>">
+                            <span class="admin-nav-icon"><?= $__adminNavItem[0] ?></span>
+                            <b><?= e($__adminNavItem[1]) ?></b>
+                            <?php if ($__adminNavBadge > 0): ?><em><?= $__adminNavBadge ?></em><?php endif; ?>
                         </a>
                     <?php endforeach; ?>
                     </div>

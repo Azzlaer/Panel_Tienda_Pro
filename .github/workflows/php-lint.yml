@@ -46,6 +46,8 @@ jobs:
         run: php tests/security_center_smoke.php
       - name: Integrated modules smoke checks
         run: php tests/integration_suite_smoke.php
+      - name: Admin catalog sidebar scope regression
+        run: php tests/admin_products_nav_collision_test.php
       - name: Content Hub and Page Builder security checks
         run: php tests/content_hub_test.php
       - name: Marketplace Enterprise validation
