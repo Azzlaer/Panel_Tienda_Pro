@@ -26,4 +26,5 @@ merchant_test(str_contains($lib,"'team'=>['owner']"),'staff management restricte
 $integration=(string)file_get_contents($root.'/admin/integration_center.php');
 merchant_test(str_contains($integration,'merchant_install(db())'),'activation wired into integration center');
 $header=(string)file_get_contents($root.'/partials/header.php');
-merchant_test(str_contains($header,'merchant_center.php'),'merchant center available via public navigation');
+$menu=(string)file_get_contents($root.'/app/public_menu.php');
+merchant_test(str_contains($header,'public_menu_items') && str_contains($menu,"'merchant_center.php'"),'merchant center available via configurable public navigation');
