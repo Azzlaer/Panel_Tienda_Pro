@@ -65,7 +65,7 @@ function public_menu_items(?string $stored=null): array {
 function public_menu_save(PDO $pdo,array $items): void {
  $normalized=public_menu_normalize($items);
  $json=json_encode($normalized,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);
- $q=$pdo->prepare("INSERT INTO settings (\`key\`,value) VALUES ('public_menu_config_v1',?) ON DUPLICATE KEY UPDATE value=VALUES(value)");
+ $q=$pdo->prepare("INSERT INTO settings (`key`,value) VALUES ('public_menu_config_v1',?) ON DUPLICATE KEY UPDATE value=VALUES(value)");
  $q->execute([$json]);
  if(function_exists('clear_settings_cache'))clear_settings_cache();
 }
