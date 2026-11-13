@@ -18,9 +18,11 @@ foreach(['hub','marketplace','merchant'] as $key){
 foreach(['hub','page_builder','marketplace','merchant_center'] as $nav){
  integration_three_check(str_contains($admin,"'".$nav."' =>"),$nav.' admin navigation');
 }
-foreach(['content_hub.php','marketplace.php','merchant_center.php','page.php?slug='] as $link){
- integration_three_check(str_contains($public,$link),$link.' public navigation');
+$menu=file_source('app/public_menu.php');
+foreach(['content_hub.php','marketplace.php','merchant_center.php'] as $link){
+ integration_three_check(str_contains($public,'public_menu_items') && str_contains($menu,"'".$link."'"),$link.' public navigation');
 }
+integration_three_check(str_contains($public,'page.php?slug='),'dynamic content pages public navigation');
 foreach(['tests/content_hub_test.php','tests/marketplace_test.php','tests/merchant_center_test.php','tests/mariadb_integration.php','tests/marketplace_mariadb.php','tests/merchant_center_mariadb.php'] as $test){
  integration_three_check(str_contains($workflow,$test),$test.' CI included');
 }

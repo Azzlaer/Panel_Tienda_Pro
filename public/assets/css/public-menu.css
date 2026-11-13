@@ -1,0 +1,10 @@
+/* Enhancements only for administrator-defined menu sections. Flat classic navigation is unchanged. */
+.enterprise-public .urban-menu.pm-has-groups{overflow:visible;flex-wrap:wrap}
+.enterprise-public .pm-nav-group{position:relative;align-self:center}
+.enterprise-public .pm-nav-group>summary{display:flex;align-items:center;gap:7px;list-style:none;padding:11px 15px;border-radius:8px;font-size:13px;font-weight:700;color:#cddaf2;cursor:pointer;white-space:nowrap}
+.enterprise-public .pm-nav-group>summary::-webkit-details-marker{display:none}
+.enterprise-public .pm-nav-group>summary:hover,.enterprise-public .pm-nav-group[open]>summary{background:#284a7e;color:#fff}
+.enterprise-public .pm-nav-dropdown{position:absolute;top:100%;left:0;z-index:200;background:#122341;border:1px solid #33547d;border-radius:10px;box-shadow:0 16px 30px #0b173055;min-width:220px;max-width:min(320px,90vw);padding:6px;display:grid}
+.enterprise-public .pm-nav-dropdown a{padding:10px 13px!important;white-space:normal!important;text-decoration:none}
+.enterprise-public .pm-nav-group>summary:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+@media(max-width:700px){.enterprise-public .urban-menu.pm-has-groups{align-items:center}.enterprise-public .pm-nav-dropdown{left:0}}
