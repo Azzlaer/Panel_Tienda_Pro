@@ -44,6 +44,7 @@ $navGroups = [
     'Apariencia' => [
         'builder' => ['🎨', 'Diseño y portada', 'site_builder.php'],
         'studio' => ['🖌️', 'Theme Studio PRO', 'theme_studio.php'],
+        'public_menu' => ['🧭', 'Administrador de menús', 'public_menu.php'],
         'design' => ['🧰', 'Diseño avanzado', 'design.php'],
         'templates' => ['🧩', 'Plantillas', 'templates.php'],
     ],
