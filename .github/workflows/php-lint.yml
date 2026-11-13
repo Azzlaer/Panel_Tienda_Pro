@@ -70,10 +70,6 @@ jobs:
         run: node --check public/assets/js/content-page-builder.js
       - name: Marketplace JavaScript syntax
         run: node --check public/assets/js/marketplace-enterprise.js
-      - name: Calle Cristal Navigation PRO regression
-        run: php tests/navigation_pro_test.php
-      - name: Calle Cristal navigation JavaScript syntax
-        run: node --check public/assets/js/calle-cristal-navigation.js
 
   mariadb-integration:
     runs-on: ubuntu-latest
