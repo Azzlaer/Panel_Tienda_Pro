@@ -18,4 +18,4 @@ smart_check(str_contains($view,'mkt-hero-search') && str_contains($view,'busines
 $api=(string)file_get_contents($root.'/public/marketplace_suggest.php');
 smart_check(str_contains($api,"'GET'") && str_contains($api,'json_encode') && str_contains($api,'marketplace_suggestions'),'Safe JSON suggestion route');
 $js=(string)file_get_contents($root.'/public/assets/js/marketplace-enterprise.js');
-smart_check(str_contains($js,'textContent')===false && str_contains($js,'document.createElement') && !str_contains($js,'innerHTML'),'Autocomplete uses DOM methods not HTML');
+smart_check(str_contains($js,'document.createElement') && str_contains($js,'list.replaceChildren') && !str_contains($js,'innerHTML'),'Autocomplete uses DOM methods not HTML');
