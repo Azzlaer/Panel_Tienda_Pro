@@ -15,7 +15,7 @@ chk($unsafe['sort']==='recent' && $unsafe['category']===0 && $unsafe['seller']==
 $args=[];$where=marketplace_where($f,$args);
 chk(str_contains($where,"pr.status='published'") && str_contains($where,"u.status='active'"),'only published products from active sellers');
 chk(str_contains($where,'pr.price_clp>=?') && str_contains($where,'pr.user_id=?'),'filters use PDO placeholders');
-chk(!str_contains($where,'999') && count($args)===9,'all user values bound');
+chk(!str_contains($where,'999') && count($args)===10,'all user values bound');
 chk(marketplace_order('price_asc')==='pr.price_clp ASC,pr.id DESC','sort mapped to fixed SQL');
 chk(marketplace_order('evil')==='pr.featured DESC,pr.created_at DESC,pr.id DESC','sort fallback safe');
 chk(marketplace_selected_ids(['9','2','2','0','foo','1','3','4'])===[9,2,1,3],'compare selection bounded and distinct');

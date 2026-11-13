@@ -56,6 +56,8 @@ jobs:
         run: php tests/content_hub_test.php
       - name: Marketplace Enterprise validation
         run: php tests/marketplace_test.php
+      - name: Marketplace Inteligente PRO regression
+        run: php tests/marketplace_smart_test.php
       - name: Merchant Center authorization smoke checks
         run: php tests/merchant_center_test.php
       - name: VIP product NameEffects access and styling checks
