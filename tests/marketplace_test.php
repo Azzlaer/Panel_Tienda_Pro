@@ -29,7 +29,8 @@ chk(str_contains($actions,'require_login()') && str_contains($actions,'verify_cs
 chk(str_contains($actions,'WHERE id=? AND user_id=?'),'saved search deletion owner scoped');
 chk(str_contains($saved,'f.user_id=?') && str_contains($saved,'WHERE user_id=?'),'personal collections owner scoped');
 chk(str_contains($admin,'require_admin()'),'admin analytics restricted');
-chk(str_contains($nav,'marketplace.php'),'public navigation includes marketplace');
+$menu=(string)file_get_contents($root.'/app/public_menu.php');
+chk(str_contains($nav,'public_menu_visible') && str_contains($menu,"'marketplace.php'"),'public navigation includes marketplace through editable menu defaults');
 chk(str_contains($integration,'marketplace_install(db())'),'manual migration activation wired');
 $sql=(string)file_get_contents($root.'/database/migrations/2026_11_10_000012_marketplace.sql');
 chk(substr_count($sql,'CREATE TABLE IF NOT EXISTS')===2,'two additive tables');
